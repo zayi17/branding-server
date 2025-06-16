@@ -1,0 +1,16 @@
+// SCSS Variables for test site
+
+$breakpoint-mobile: 767px;
+$breakpoint-tablet: 1023px;
+$breakpoint-desktop: 1024px;
+#id-1: id-1-prop-1: 50px;
+$col-main: #3341ff;
+$col-tertiary: #1f3456;
+$col-colour: #545454;
+$-var-2: #ffffff;
+$var-20: var(--col-primary);
+$var-test: var(--var-test);
+$site-logo: url(google.com.logo.png);
+.some-class: prop6: value6;
+$sec-col-red: #0e44c4;
+.test-class: test-class-prop-2: 100px !important; test-class-prop-3: 200px;

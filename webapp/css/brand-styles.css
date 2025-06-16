@@ -1,0 +1,1064 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300&display=swap');
+
+:root {
+    /* Dark Theme Colors */
+    --bg-primary: #151515;
+    --bg-secondary: #1e1e1e;
+    --bg-tertiary: #2d2d2d;
+    --bg-hover: #3c3c3c;
+    --bg-active: #4c4c4c;
+    --text-primary: #cbcbcb;
+    --text-secondary: #a0a0a0;
+    --text-tertiary: #7a7a7a;
+    --accent-color: #3c3c3c;
+    --accent-hover: #979797;
+ 
+    --sidebar-bg: #151515;
+    --header-bg: #222222;
+    --code-bg: #2a2a2a;
+    --code-text: #cccccc;
+    --danger-color: #e57373;
+    --danger-hover: #ef5350;
+    --success-color: #81c784;
+    --warning-color: #ffb74d;
+
+    /* Spacing */
+    --spacing-unit: 8px;
+    --padding-xs: calc(var(--spacing-unit) * 0.5);
+    --padding-sm: var(--spacing-unit);
+    --padding-md: calc(var(--spacing-unit) * 2);
+    --padding-lg: calc(var(--spacing-unit) * 3);
+    
+    /* Border Radius */
+    --border-radius-sm: var(--border-radius-buttons);
+        --border-radius-md: 5px;
+    --border-radius-lg: 8px;
+    
+
+}
+
+/*
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+*/
+
+
+
+.css-elements-section:nth-child(1) {
+margin-top: 0;
+}
+
+
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.api-config {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius-md);
+}
+
+.api-config h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-hover);
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+
+
+.btn-primary {
+    background-color: #323437;
+    color: white;
+    width: 130px;
+
+}
+
+.btn-primary:hover,
+.btn-tertiary:hover {
+    background-color: #5a6b91;
+}
+
+.btn-secondary {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    width: 130px !important
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-hover);
+}
+
+.status-message {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.success {
+    color: var(--success-color);
+}
+
+.error {
+    color: var(--danger-color);
+}
+
+/* CSS Elements Container */
+.css-elements-section {
+    margin-top: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    flex-direction: row;
+    padding-right: 44px;
+    height: 44px;
+}
+
+
+.css-elements-container {
+   
+    border-radius: var(--border-radius-md);
+    margin-bottom: 8px;
+    overflow: hidden;
+    padding: 0 20px 0 20px;
+}
+
+.css-elements-header {
+    display:         flex;
+    justify-content: space-between;
+    align-items:     center;
+    padding-right:   16px;
+    padding-left:    16px;
+    margin-top:      10px;
+    /* padding:      var(--padding-md); */
+        background-color: var(--bg-tertiary); 
+    /* border-bottom: 1px solid var(--border-color); */
+}
+
+.css-elements-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.css-elements-actions {
+    display: flex;
+    gap: var(--padding-sm);
+}
+
+.button {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: var(--padding-xs) var(--padding-md);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.button:hover {
+    background-color: var(--bg-active);
+}
+
+
+
+.button-primary:hover {
+    background-color: #515151;
+}
+
+/* CSS Variables Table */
+.css-variables-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.group-header {
+    background-color: var(--bg-tertiary);
+    padding: var(--padding-md);
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+    user-select: none;
+}
+
+.group-header:hover {
+    background-color: var(--bg-hover);
+}
+
+.group-header-content {
+    display: flex;
+    align-items: center;
+}
+
+.group-header-content .icon {
+    margin-right: var(--padding-sm);
+    transition: transform 0.2s;
+}
+
+.group-header.collapsed .icon {
+    transform: rotate(-90deg);
+}
+
+
+
+.variable-row:last-child {
+    border-bottom: none;
+}
+
+.variable-content, .variant-row {
+    display: grid;
+    grid-template-columns: 31px 50px .5fr 30px .5fr 100px .5fr 92px 184px;
+    gap: var(--padding-md);
+    padding: 2px 16px 2px 16px;
+    align-items: center;
+}
+
+label {
+    cursor: default;
+    font-size: 12px; }
+
+.variable-name, .variable-value {
+    position: relative;
+}
+
+.editable-field {
+    border: 1px solid rgb(0,0,0,0);
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    width:98%;
+    padding: 0 8px;
+
+    height: 25px !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    transition: border-color 0.2s;
+    cursor: text;
+}
+
+.editable-field:hover {
+    border-color: var(--text-tertiary);
+    border: 1px solid var(--border-color);
+}
+
+.editable-field:focus {
+    border-color: #4d5d80;
+    outline: none;
+}
+
+
+
+.variable-importance, .variant-importance {
+    text-align: left;
+   
+}
+
+
+.importance-checkbox,
+.enable-disable-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+}
+
+.importance-checkbox:checked,
+.enable-disable-checkbox:checked {
+    background-color: transparent;
+    border-color: #6e7076;
+}
+
+.importance-checkbox:checked::after,
+.enable-disable-checkbox:checked::after {
+    font-family: 'Font Awesome 6 Free', 'FontAwesome';
+    font-weight: 800;
+    content: '\f00c';  /* Font Awesome check icon */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 9px;
+    color: white;
+}
+
+.variable-actions, .variant-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+
+.action-button {
+    background-color: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--padding-xs);
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.action-button:hover {
+    background-color: var(--bg-hover);
+    color: var(--danger-color);
+}
+
+.action-button.delete:hover {
+    color: var(--danger-color);
+}
+
+
+
+.variant-row {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--padding-sm);
+    overflow: hidden;
+}
+
+.variant-row:last-child {
+    margin-bottom: 0;
+}
+
+.variant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding-xs) var(--padding-sm);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.variant-breakpoint {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+
+
+.variant-content {
+    display: grid;
+    grid-template-columns: 1fr 80px 60px;
+    gap: var(--padding-sm);
+    padding: var(--padding-xs) var(--padding-sm);
+    align-items: center;
+}
+
+
+
+
+
+
+
+/* Variant badges for different breakpoints */
+.variant-breakpoint {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    background-color: var(--bg-hover);
+
+}
+
+.variant-row[data-breakpoint="mobile"] .variant-breakpoint {
+    background-color: var(--bp-col-mobile);
+    color: black;
+}
+
+.variant-row[data-breakpoint="tablet"] .variant-breakpoint {
+    background-color: var(--bp-col-tablet);
+    color: black;
+}
+
+.variant-row[data-breakpoint="desktop"] .variant-breakpoint {
+    background-color: var(--bp-col-desktop);
+    color: black;
+}
+
+/* Add Variable Row */
+.add-variable-row {
+    padding: 5px;
+    padding-left: 25px;
+    margin-top: 12px;
+    border-top: 1px dashed var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: var(--padding-sm);
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.add-variable-row:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+/* Modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius-md);
+    width: 90%;
+    max-width: 500px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#class-rules-input {
+    height: 155px !important;
+}
+
+.modal-header {
+    padding: var(--padding-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.modal-body {
+    padding: var(--padding-md);
+}
+
+.modal-footer {
+    padding: var(--padding-md);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--padding-sm);
+        bottom: 0 !important;
+    position: absolute;
+    width: 460px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Color picker enhancements */
+.color-picker-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.color-picker-wrapper input[type="color"] {
+    border: none;
+    padding: 0;
+    width: 30px;
+    height: 28px;
+    background: none;
+    cursor: pointer;
+}
+
+.color-picker-wrapper input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.color-picker-wrapper input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: var(--border-radius-sm);
+}
+
+.color-picker-wrapper input[type="text"] {
+    padding-left: 35px;
+}
+
+/* CSS Export */
+.css-output {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius-md);
+}
+
+.css-output h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.css-code {
+    background-color: var(--bg-tertiary);
+    padding: 15px;
+    border-radius: var(--border-radius-sm);
+    font-family: monospace;
+    white-space: pre-wrap;
+    color: var(--text-primary);
+    overflow-x: auto;
+}
+
+/* Light Theme */
+body.light-theme {
+    background-color: #f5f5f5;
+    color: #333333;
+}
+
+body.light-theme :root,
+body.light-theme {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --bg-tertiary: #e8e8e8;
+    --bg-hover: #e0e0e0;
+    --bg-active: #d0d0d0;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-tertiary: #999999;
+    --border-color: #cccccc;
+    --code-bg: #f0f0f0;
+    --code-text: #333333;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .variable-content {
+        grid-template-columns: 1fr;
+        gap: var(--padding-sm);
+        padding: var(--padding-md);
+    }
+
+    .variable-content > div {
+        margin-bottom: var(--padding-xs);
+    }
+
+
+    
+    .variant-content {
+        grid-template-columns: 1fr;
+        gap: var(--padding-xs);
+    }
+    
+    .variant-preview, .variant-importance {
+        justify-self: start;
+    }
+}
+
+/* Badge for showing variant count */
+.variant-count {
+    background-color: #4d5d80;
+    color: white;
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 8px;
+    margin-left: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+}
+
+/* Tooltip for breakpoint information */
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+
+.tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+
+
+
+
+/* Make preview a color picker */
+.color-preview {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: var(--border-radius-sm);
+}
+
+
+
+@media (max-width: 768px) {
+    .variant-row {
+        grid-template-columns: 80px 1fr 60px 40px;
+    }
+}
+
+
+
+.color-picker-input {
+    position: absolute;
+    top: 100%; /* Positions it below the parent */
+    left: 0;
+    width: 100%; /* Matches parent width */
+    height: 24px; /* Give it a height */
+    opacity: 0; /* Invisible */
+    z-index: 10; /* Clickable */
+    /* ... other styles like cursor, border, padding, background ... */
+}
+
+
+#section-title-vars {
+font-size: 14px;
+    border-bottom: 0  !important;
+}
+
+
+
+
+/* group section styling */ 
+
+#css-group-color,
+#css-group-image,
+#css-group-typography,
+#css-group-dimension,
+#css-group-selector {
+    border: 0 !important;
+   /* background-color: #8e3939 !important; */ 
+    margin: 0 !important;
+   
+
+}
+
+#css-elements-background {
+padding:20px  !important;
+
+}
+
+
+
+
+
+
+
+
+
+/* ----------------------------------------------------- */
+
+
+/* CSS for value status icons */
+.variable-value-wrapper {
+    position: relative;
+    display: flex; /* Align input and icon */
+    align-items: center;
+    flex-grow: 1; /* Allow the wrapper to take available space */
+}
+
+.variable-value-wrapper .variable-value-input {
+    flex-grow: 1; /* Allow input to take available space */
+    padding-right: 28px; /* Make space for the icon */
+    width: 100%; /* Ensure it tries to fill the space */
+    box-sizing: border-box;
+}
+
+.value-status-icon {
+    position: absolute;
+    right: 5px; /* Position icon inside the wrapper, to the right */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    cursor: default;
+    display: none; /* Hidden by default */
+    pointer-events: none; /* So it doesn't interfere with input clicks */
+}
+
+/* Icon-specific styles */
+.value-status-icon.icon-warning {
+    color: orange;
+    display: inline-block; /* Show when class is applied */
+}
+
+.value-status-icon.icon-error {
+    color: red;
+    display: inline-block; /* Show when class is applied */
+}
+
+.value-status-icon.icon-valid { /* Optional: for a valid reference, if needed */
+    color: green;
+    display: inline-block;
+}
+
+
+
+
+
+/*------------------------------------------------------ */
+/* CSS for the suggestion dropdown */
+#css-variable-suggestions {
+    border: 1px solid var(--border-color, #555);
+    background-color: var(--bg-secondary, #2d2d2d);
+    max-height: 150px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 0 0 var(--border-radius-sm, 4px) var(--border-radius-sm, 4px); /* Match your theme */
+    /* Position and z-index are set by JavaScript, but good to have defaults */
+    position: absolute; /* Crucial for positioning */
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.suggestion-item {
+    padding: 8px 12px;
+    color: var(--text-primary, #ccc);
+    cursor: pointer;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border-color, #555);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background-color: var(--accent-color, #007bff);
+    color: var(--bg-primary, #fff); /* Or specific text color for hover */
+}
+
+
+
+/* class layout */
+
+.class-rule-header {
+    display: grid
+;
+    justify-content: space-between;
+    margin: 10px 12px 0 17px;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    grid-template-columns: 36px 1fr 55px;
+    justify-items: stretch;
+}
+.class-rule-footer-bracket {
+    margin-bottom: 20px;
+}
+
+span.selector-bracket, .class-rule-footer-bracket {
+    padding-left: 52px !important;
+    padding-bottom: 10px;
+}
+
+
+
+.variable-brace-close {
+
+    margin-left: 52px;
+}
+
+
+
+.general-section {
+    display: grid;
+    justify-content: space-between;
+    width: 100%;
+    justify-items: stretch;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solide var(--border-color);
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Inheritance section styling */
+.inheritance-section, .description-section {
+    border-right: 1px solid var(--border-color);
+    margin-bottom: -23px;
+}
+
+
+
+h3#description-title {
+    margin-top: 0 !important;
+}
+
+p#brand-styling-description {
+        margin: var(--margin);
+}
+
+.editable-field::placeholder {
+  color: #4e4e4e; /* Replace with any color you want */
+}
+
+.variable-content, .variant-row {
+    border-left: 2px solid rgba(0,0,0,0);
+    transition: border-left 0.2s ease-in-out;
+}
+
+.variable-content:hover, .variant-row:hover {
+    border-left: 2px solid rgb(189, 189, 189);
+}
+
+
+
+
+
+/* Variant styles */
+/* Variant styles with preview as color picker */
+.variable-variants {
+/*  background-color: var(--bg-tertiary); */
+    border-top: 1px dashed var(--border-color);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+.variant-breakpoint {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding: 2px 6px;
+    border-radius: 3px;
+    background-color: var(--bg-hover);
+    width:50%;
+    
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+
+
+/* Update the section-title style to remove the border-bottom */
+#description-header  {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Add these styles */
+.description-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+}
+
+/* Style the edit button to align with the header */
+.edit-description-btn {
+    font-size: 14px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    justify-content: right;
+}
+
+.edit-description-btn:hover {
+    color: var(--text-primary);
+}
+
+
+
+
+
+/* Modal specific styles - replace only these */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius-md);
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    padding: var(--padding-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.modal-body {
+    padding: var(--padding-md);
+    flex: 1;
+    min-height: 300px;
+    overflow-y: auto;
+}
+
+.css-input-container {
+    position: relative;
+    height: 340px;
+    margin-top: 8px;
+}
+
+#class-rules-input {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.modal-footer {
+    padding: var(--padding-md);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--padding-sm);
+}
+
+/* Add specific styles for group modals */
+#add-group-modal .modal {
+    min-height: auto !important;
+    height: auto;
+}
+
+#add-group-modal .modal-body {
+    min-height: auto !important;
+    height: auto;
+    flex: 0 0 auto;
+}
+
+#add-group-modal .modal-footer {
+    position: relative;
+    width: auto;
+    bottom: auto;
+}
+
+
+
+

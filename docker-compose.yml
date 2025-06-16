@@ -1,0 +1,50 @@
+# In docker-compose.yml
+
+services:
+  branding-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      # FIXED: The backend runs on port 8000 inside the container, not 7000.
+      - "5000:6000"
+    volumes:
+      - ./assets:/app/assets
+      - ./data:/data
+    environment:
+      - HOST=0.0.0.0
+      # PORT should be 8000 to match the Dockerfile command.
+      - PORT=6000
+      - DEBUG=True
+      - DB_URL=sqlite:////data/branding_server.db
+      - ASSET_DIR=assets
+      - API_KEY_REQUIRED=True
+      - API_KEY=${API_KEY}
+      - CORS_ORIGINS=https://brand-assets.apps.yourdomain.com
+      - BASE_URL=https://api.yourdomain.com
+    restart: always
+
+  frontend-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "5080:80"
+    volumes:
+      # FIXED: Your application files must be mounted to be served.
+      - ./index.html:/usr/local/apache2/htdocs/index.html
+      - ./css:/usr/local/apache2/htdocs/css
+      - ./scripts:/usr/local/apache2/htdocs/scripts
+      - ./public:/usr/local/apache2/htdocs/public
+    environment:
+      - API_URL=https://api.yourdomain.com
+      # FIXED: Typo corrected from APY_KEY to API_KEY.
+      # This fixes the warning from your terminal log.
+      - API_KEY=${API_KEY}
+      - OIDC_ENABLED=True
+      - OIDC_URL=https://auth.secure.yourdomain.com
+      - OIDC_REALM=kc-realm
+      - OIDC_CLIENT_ID=kc-client-id
+    depends_on:
+      - branding-server
+    restart: always

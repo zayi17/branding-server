@@ -1,0 +1,39 @@
+/* CSS for Brand Styling: Default Site (ID: 2) */
+:root {
+/* GROUP: General */
+  --breakpoint-mobile: 767px; /* TYPE: other */
+  --breakpoint-tablet: 1023px; /* TYPE: other */
+  --breakpoint-desktop: 1024px; /* TYPE: other */
+  --breakpoint-test: 200px; /* TYPE: other */
+
+  /* GROUP: site colours */
+  --col-bg: #2a5c9d; /* TYPE: other */
+  --col-bg-copy: #080808; /* TYPE: other */
+
+  /* GROUP: site logos */
+  --logo-main: url('https://content.petesteege.com/web/logos/psm_logo_square_1.png'); /* TYPE: other */
+  --logo-main-large: var(--logo-main); /* TYPE: other */
+  --logo-main-copy: url('https://content.petesteege.com/web/logos/psm_logo_square_1.png'); /* TYPE: other */
+
+  /* GROUP: test */
+  --test: 50fr; /* TYPE: other */
+}
+
+@media desktop {
+  :root {
+    --col-bg: #6f7485;
+    --col-bg-copy: #121212;
+  }
+}
+
+@media mobile {
+  :root {
+    --logo-main: url('https://content.petesteege.com/web/logos/psm_logo_square_1.png');
+  }
+}
+
+@media test {
+  :root {
+    --col-bg: #1b1c22;
+  }
+}

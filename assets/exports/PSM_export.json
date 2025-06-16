@@ -1,0 +1,69 @@
+{
+  "brand": {
+    "id": 4,
+    "name": "PSM",
+    "site_id": 2
+  },
+  "assets": [
+    {
+      "name": "--breakpoint-mobile",
+      "type": "dimension",
+      "value": "767px",
+      "description": "Maximum width for mobile devices"
+    },
+    {
+      "name": "--breakpoint-tablet",
+      "type": "dimension",
+      "value": "1023px",
+      "description": "Maximum width for tablet devices"
+    },
+    {
+      "name": "--breakpoint-desktop",
+      "type": "dimension",
+      "value": "1024px",
+      "description": "testing"
+    },
+    {
+      "name": "top",
+      "type": "css_declaration",
+      "value": "50px",
+      "description": null
+    },
+    {
+      "name": "--var-other-1",
+      "type": "other",
+      "value": "50px",
+      "description": null
+    },
+    {
+      "name": "width",
+      "type": "css_declaration",
+      "value": "50px",
+      "description": null
+    },
+    {
+      "name": "height",
+      "type": "css_declaration",
+      "value": "50px",
+      "description": null
+    },
+    {
+      "name": "padding",
+      "type": "css_declaration",
+      "value": "0",
+      "description": null
+    },
+    {
+      "name": "top",
+      "type": "css_declaration",
+      "value": "1px",
+      "description": null
+    },
+    {
+      "name": "border",
+      "type": "css_declaration",
+      "value": "2px solid green",
+      "description": null
+    }
+  ]
+}

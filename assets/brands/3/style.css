@@ -1,0 +1,33 @@
+/* CSS for Brand Styling: Intranet (ID: 3) */
+/* Inherits from Master Brand: Default Site (ID: 2) */
+@import url('http://localhost:8000/brand/2/css');
+
+:root {
+/* GROUP: General */
+  --breakpoint-mobile: 767px; /* TYPE: dimension */
+  --breakpoint-tablet: 1023px; /* TYPE: dimension */
+  --breakpoint-desktop: 1024px; /* TYPE: dimension */
+
+  /* GROUP: intranet colours */
+  --intranet-col-bg: #2378e7; /* TYPE: color */
+  --col-bg: red; /* TYPE: color */
+}
+
+/* Selectors & Rules */
+
+/* UI GROUP: test group */
+.some-class {
+  top: 50px;
+}
+
+@media desktop {
+  :root {
+    --intranet-col-bg: #2378e7;
+  }
+}
+
+@media tablet {
+  :root {
+    --intranet-col-bg: #2378e7;
+  }
+}

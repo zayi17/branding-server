@@ -1,0 +1,211 @@
+/* site-icons.css - Chrome-style folder icons and arrows with fixed alignment */
+
+:root {
+    /* Folder colors */
+
+    --col-blue: #5F87D6;        /* Blue */
+    --col-orange: #cf7a52;      /* Orange */
+    --col-red: #E57373;         /* Red */
+    --col-green: #81C784;       /* Green */
+    --col-light-blue: #64B5F6;  /* Light blue */
+    --col-yellow: #c7b065 ;      /* Yellow */
+    --col-purple: #975DC8;      /* Purple */
+    --col-gray: #9f9f9f;        /* Gray */
+
+    --folder-site-color: var(--col-blue);      /* Blue */
+    --folder-brand-color: var(--col-purple);     /* Orange */
+    --folder-color-color:  var(--col-orange);     /* Red */
+    --folder-image-color:  var(--col-orange);     /* Green */
+    --folder-font-color:  var(--col-orange);      /* Light blue */
+    --folder-dimension-color: var(--col-orange); /* Yellow */
+    --folder-css-color:  var(--col-green);       /* Purple */
+    --folder-url-color: var(--col-gray);       /* Gray */
+     --folder-selector-color: var(--col-orange);       /* Gray */
+    --folder-folder-color: var(--col-orange) !important;
+    
+    /* Font Awesome Icons */
+    /* --icon-folder: "\f07b";            /* Regular folder */
+    /* --icon-folder-open: "\f07c";       Open folder */
+    /* --icon-arrow: "\f0da";             /* Right arrow/triangle */
+    /* --icon-site: "\f57d";              /* Globe */
+    /* --icon-brand: "\f53f";             /* Palette */
+    /* --icon-color: "\f575";             /* Fill-drip */
+    /* --icon-image: "\f03e";             /* Image */
+    /* --icon-font: "\f031";              /* Typography */
+    /* --icon-dimension: "\f337";         /* Arrows-alt-h */
+    /* --icon-css: "\f121";               /* Code */
+   /*  --icon-url: "\f0c1";               /* Link */
+    /* --icon-item: "\f022";      */      
+
+
+    --icon-folder: "\f07b";            /* Regular folder */
+    --icon-folder-open: "\f07c";       /* Open folder */
+    --icon-arrow: "\f0da";             /* Right arrow/triangle */
+    --icon-site: "\f57d";              /* Globe */
+    --icon-brand: "\f53f";             /* Palette */
+    --icon-color: "\f022";             /* Fill-drip */
+    --icon-image: "\f022";             /* Image */
+    --icon-font: "\f022";              /* Typography */
+    --icon-dimension: "\f022";         /* Arrows-alt-h */
+    --icon-css: "\f121";               /* Code */
+    --icon-selector: "\f022";          /* Selector */
+    --icon-url: "\f07b";               /* Link */
+    --icon-item: "\f15b";              /* Item */
+    --icon-cloud: "\f0c2";             /* Cloud */
+    --icon-code: "\f121";              /* Code */
+    
+    /* Spacing between tree items */
+    --tree-item-spacing: calc(var(--spacing-unit) * 0.7);
+    
+    /* Icon width for consistent alignment */
+    --icon-width: 25px;
+}
+  
+/* Tree item spacing */
+.tree-list li {
+    margin-bottom: var(--tree-item-spacing);
+}
+  
+/* Style the Font Awesome folder icons with the custom colors */
+.tree-list > .tree-item-container[id^="site-"] .tree-item[data-site-id] .tree-item-icon {
+    color: var(--folder-site-color) !important;
+}
+
+.tree-list > .tree-item-container[id^="site-"] .tree-item[data-styling-id]:not([data-asset-type]) .tree-item-icon {
+    color: var(--folder-brand-color) !important;
+}
+  
+.tree-item[data-asset-type="colors"] .tree-item-icon {
+    color: var(--folder-folder-color) !important;
+}
+  
+.tree-item[data-asset-type="images"] .tree-item-icon {
+    color: var(--folder-image-color) !important;
+}
+  
+.tree-item[data-asset-type="fonts"] .tree-item-icon {
+    color: var(--folder-font-color) !important;
+}
+
+.tree-item[data-asset-type="selector"] .tree-item-icon {
+    color: var(--folder-selector-color) !important;
+} 
+
+.tree-item[data-asset-type="dimensions"] .tree-item-icon {
+    color: var(--folder-dimension-color) !important;
+}
+  
+.tree-item[data-asset-type="css"] .tree-item-icon {
+    color: var(--folder-css-color) !important;
+
+}
+  
+.tree-item[data-action="copy-css-url"] .tree-item-icon {
+    color: var(--folder-url-color) !important;
+}
+  
+/* Tree item basic styling with fixed-width icon container */
+.tree-item i {
+    margin-left: 8px;
+    margin-right: 12px;
+     color: var(--text-secondary); 
+    transition: transform 0.2s ease;
+    display: inline-block;
+    width: var(--icon-width); /* Fixed width for all icons */
+    text-align: center; /* Center the icon in its fixed-width container */
+}
+  
+
+
+
+/* Rotate the triangle when its container is expanded */
+.tree-item-container.expanded > .tree-item > .tree-toggle-icon {
+    transform: rotate(90deg);
+}
+
+
+/* Icon sizing */
+.tree-item-icon {
+    font-size: 15px; /* Match item font size */
+}
+  
+/* Change the folder icons to regular folders */
+.tree-item[data-site-id] .tree-item-icon::before {
+    content: var(--icon-folder);
+    font-family: 'Font Awesome 6 Free', 'FontAwesome';
+    font-weight: 400; /* Regular style */
+}
+  
+.tree-item[data-styling-id]:not([data-asset-type]) .tree-item-icon::before {
+    content: var(--icon-folder);
+    font-family: 'Font Awesome 6 Free', 'FontAwesome';
+    font-weight: 400; /* Regular style */
+}
+  
+/* When folder is expanded, show open folder icon */
+.tree-item.expanded[data-site-id] .tree-item-icon::before,
+.tree-item.expanded[data-styling-id]:not([data-asset-type]) .tree-item-icon::before {
+    content: var(--icon-folder-open);
+    font-family: 'Font Awesome 6 Free', 'FontAwesome';
+    font-weight: 400; /* Regular style */
+}
+
+/* Improve vertical alignment for text */
+.tree-item-content {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+
+/* This rule targets the LIST ITEM icons (Colors, Images, etc.) */
+.tree-item[data-asset-type] .tree-item-icon::before,
+.tree-item[data-action] .tree-item-icon::before {
+    content: var(--icon-item);          /* This line was MISSING. It adds the icon. */
+    font-family: 'Font Awesome 6 Free', 'FontAwesome';
+    font-weight: 500;                   /* This makes the icons OUTLINED (not filled). */
+}
+
+/* This rule ensures the FOLDER icons are also OUTLINED (not filled) */
+.tree-item[data-site-id] .tree-item-icon::before,
+.tree-item[data-styling-id]:not([data-asset-type]) .tree-item-icon::before {
+    font-weight: 400; /* This makes the icons OUTLINED (not filled). */
+    font-family: 'Font Awesome 6 Free', 'FontAwesome';
+
+}
+
+i.tree-item-icon {
+    font-style: normal !important;
+    font-family: 'Font Awesome 6 Free', 'FontAwesome';
+
+}
+
+#css-editor-icon::before {
+content: var(--icon-code) !important;
+    font-family: 'Font Awesome 6 Free', 'FontAwesome';
+
+}
+
+#css-url-icon::before {
+content: var(--icon-cloud) !important;
+    font-family: 'Font Awesome 6 Free', 'FontAwesome';
+    color:var(--folder-url-color) !important;
+
+}
+
+/* Base style for all toggle arrows */
+.tree-item .tree-toggle-icon {
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+    font-size: 12px;
+    width: auto; 
+}
+  
+/* Use the ::before pseudo-element to create the arrow shape */
+.tree-item .tree-toggle-icon::before {
+    content: var(--icon-arrow); /* Defined in your :root */
+}
+  
+/* Rotated state for ANY container that has the .expanded class */
+.tree-item-container.expanded > .tree-item > .tree-toggle-icon {
+    transform: rotate(90deg);
+}

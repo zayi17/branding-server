@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branding Server</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/editor-styles.css">
+    <link rel="stylesheet" href="css/site-icons.css">
+    <link rel="stylesheet" href="css/brand-styles.css">
+    <link rel="stylesheet" href="css/previews.css">
+    <link rel="stylesheet" href="css/inheritance.css">
+    <link rel="stylesheet" href="css/console.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <script src="https://unpkg.com/keycloak-js@latest/dist/keycloak.js"></script>
+    <script src="/config.js"></script>
+
+</head>
+<body>
+    <header class="app-header">
+        <div class="container header-content">
+            <div class="header-left">
+                <img class="site-logo" src="https://content.petesteege.com/web/logos/psm_logo_square_1.png" alt="Site Logo">
+                <div class="app-title">Branding Server</div>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn" id="home-btn" title="Home">
+                    <i class="fas fa-home"></i>
+                </button>
+                <button class="icon-btn" id="settings-btn" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button class="icon-btn" id="help-btn" title="Help">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+                <button class="icon-btn" id="about-btn" title="About">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+        </div>
+    </header>
+
+    <div class="app-container">
+        
+            <aside class="sidebar">
+                <button class="btn primary-btn" id="new-site-btn">
+                    New Site
+                </button>
+            <div class="sidebar-container">
+
+                <div class="sidebar-section">
+                    <div class="sidebar-header">
+                        <h2 class="section-title">Sites</h2>
+                        <button class="icon-btn" id="refresh-btn" title="Refresh Sites">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Search...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                </div>
+
+                <div class="folder-tree mt-4">
+                    <ul id="site-tree" class="tree-list">
+                        </ul>
+                </div>
+
+           </div>
+            </aside>
+
+        <main class="main-content">
+            <div id="content-area" class="content-card">
+
+                <div id="welcome-screen" class="content-view">
+                    <h2 class="view-title">Welcome to Branding Server</h2>
+                    <p class="view-description">Select a site or brand styling from the sidebar to manage your brand assets.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3 class="feature-title">Getting Started</h3>
+                            <p>Follow these steps to set up your branding server:</p>
+                            <ol class="feature-list">
+                                <li>Create a new site using the "New Site" button</li>
+                                <li>Add brand stylings to your site</li>
+                                <li>Add assets like colors, images, and fonts</li>
+                                <li>Use the generated CSS in your projects</li>
+                            </ol>
+                        </div>
+                        <div class="feature-card">
+                            <h3 class="feature-title">Features</h3>
+                            <ul class="feature-list">
+                                <li>Centralized brand asset management</li>
+                                <li>CSS variables for easy integration</li>
+                                <li>Support for colors, images, fonts, and more</li>
+                                <li>Export to different formats (CSS, SCSS, JSON)</li>
+                                <li>Generate documentation for your brand styling</li>
+                                <li>Theme support (light/dark mode)</li>
+                                <li>Responsive design</li>
+                                <li>Brand inheritance support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+    
+
+                <div id="help-screen" class="content-view hidden">
+
+                    <h2 class="view-title">Help & Documentation</h2>
+                    <p class="view-description">This guide provides an overview of the Branding Server's features and API endpoints.</p>
+
+                    <div class="help-section">
+                        <h3 class="section-title">Getting Started</h3>
+                        <p>The Branding Server is a tool designed to centralize the management of brand assets and generate CSS for your projects. The core workflow is as follows:</p>
+                        <ol>
+                            <li><strong>Create a Site:</strong> A Site is the top-level container, typically representing a project or a company. Use the "New Site" button in the sidebar to create one.</li>
+                            <li><strong>Add Brand Stylings:</strong> Within a Site, you can create multiple Brand Stylings. A Brand Styling is a specific collection of brand assets (e.g., "Default Theme", "Dark Mode Theme").</li>
+                            <li><strong>Manage Assets:</strong> In the Brand Styling view, you can define your brand's assets. This includes:
+                                <ul>
+                                    <li><strong>CSS Variables:</strong> Colors, Fonts, Dimensions (e.g., spacing, border-radius), and Images. These are stored as CSS custom properties (e.g., <code>--main-bg-color: #ffffff;</code>).</li>
+                                    <li><strong>Selectors & Rules:</strong> Define specific CSS rules for selectors like <code>.card</code> or <code>#header-nav</code>. The application stores each declaration (e.g., <code>color: red;</code>) as a distinct asset linked to its parent selector.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Use the CSS:</strong> Each Brand Styling generates a dynamic CSS file. You can use the provided URL to link directly to this stylesheet in your web projects.</li>
+                        </ol>
+                    </div>
+
+                    <div class="help-section">
+                        <h3 class="section-title">Key Concepts</h3>
+                        
+                        <h4>Brand Inheritance</h4>
+                        <p>A powerful feature is the ability for one Brand Styling to inherit from another (a "Master" brand). This allows you to create variations of a base theme without redefining every asset.</p>
+                        <ul>
+                            <li>A sub-brand automatically inherits all assets from its master.</li>
+                            <li>You can <strong>override</strong> any inherited asset by defining an asset with the same name (for CSS variables) or the same selector and property (for CSS rules) in the sub-brand.</li>
+                            <li>The UI provides visual icons to indicate an asset's status:
+                                <ul>
+                                    <li><span class="material-icons inherited-simple" style="vertical-align: middle;">link</span>: Inherited from a master brand.</li>
+                                    <li><span class="material-icons overridden-green" style="vertical-align: middle;">south_east</span>: A local asset that is overriding a master asset.</li>
+                                    <li><span class="material-icons overridden-orange" style="vertical-align: middle;">north_west</span>: A local asset that is being overridden by a more specific or important master asset.</li>
+                                </ul>
+                            </li>
+                            <li>Inheritance is managed in the "Inheritance" section of the Brand Styling view by selecting a master brand from the dropdown menu.</li>
+                        </ul>
+
+                        <h4>Responsive Variants</h4>
+                        <p>For any CSS variable, you can create responsive variants. These allow a variable to have different values at different screen sizes or conditions (like light/dark mode).</p>
+                        <ul>
+                            <li>Variants are added to a specific asset by clicking the "Add variant" icon (<i class="fas fa-layer-group"></i>) on the asset's row.</li>
+                            <li>The available breakpoints in the "Add Variant" modal are dynamically populated from 'dimension' assets in the current styling that have "breakpoint" in their name.</li>
+                            <li>When a variant is created, the system generates the appropriate CSS <code>@media</code> query in the final stylesheet.</li>
+                        </ul>
+
+                        <h4>Deletion Operations</h4>
+                        <p>Deletion is a permanent action and cannot be undone.</p>
+                        <ul>
+                            <li><strong>Delete Site:</strong> Clicking the "Delete Site" button in the Site view will delete the site, all of its Brand Stylings, and all associated assets.</li>
+                            <li><strong>Delete Brand Styling:</strong> Clicking the "Delete" button in the Brand Styling view will delete the current styling and its assets.</li>
+                            <li><strong>Delete Asset/Rule:</strong> Individual assets (like a color variable) or CSS rules within a selector can be deleted by clicking the delete icon (<i class="fas fa-times"></i>) on their respective rows.</li>
+                            <li><strong>Delete Selector Block:</strong> An entire selector block (e.g., <code>.my-class { ... }</code>) can be deleted by clicking the delete icon on the selector's header. This will remove all CSS rules contained within it.</li>
+                            <li><strong>Delete Variant:</strong> A specific responsive variant can be deleted by clicking the delete icon next to it in the expanded variants section of an asset.</li>
+                        </ul>
+                    </div>
+
+                    <div class="help-section">
+                        <h3 class="section-title">API Endpoints</h3>
+                        <p>The server exposes a RESTful API for managing all resources. The base URL is your server's address.</p>
+
+                        <h4>Sites</h4>
+                        <ul>
+                            <li><code>GET /sites/</code>: Retrieves a list of all sites.</li>
+                            <li><code>POST /sites/</code>: Creates a new site.</li>
+                            <li><code>GET /sites/{site_id}</code>: Retrieves details for a specific site.</li>
+                            <li><code>PUT /sites/{site_id}</code>: Updates a specific site's details.</li>
+                            <li><code>DELETE /sites/{site_id}</code>: Deletes a site and all its associated brand stylings and assets.</li>
+                        </ul>
+
+                        <h4>Brand Stylings</h4>
+                        <ul>
+                            <li><code>GET /sites/{site_id}/brand-stylings/</code>: Gets all brand stylings for a specific site.</li>
+                            <li><code>POST /sites/{site_id}/brand-stylings/</code>: Creates a new brand styling within a site.</li>
+                            <li><code>GET /brand-stylings/{styling_id}</code>: Retrieves details for a specific brand styling.</li>
+                            <li><code>PUT /brand-stylings/{styling_id}</code>: Updates a brand styling, including its name, description, and master brand for inheritance.</li>
+                            <li><code>DELETE /brand-stylings/{styling_id}</code>: Deletes a specific brand styling.</li>
+                        </ul>
+
+                        <h4>Assets & CSS</h4>
+                        <ul>
+                            <li><code>GET /brand/{styling_id}/css</code>: <strong>(Most Common)</strong> Returns the generated CSS file for a specific brand styling. This is the URL you link to in your projects.</li>
+                            <li><code>GET /brand-stylings/{styling_id}/assets-with-inheritance</code>: Retrieves all assets for a styling, including full inheritance data (source, overridden status, etc.). This endpoint powers the main UI view.</li>
+                            <li><code>POST /brand-stylings/{styling_id}/assets/</code>: Creates a new style asset (color, image, dimension, font, or CSS declaration).</li>
+                            <li><code>PUT /brand-stylings/{styling_id}/assets/{asset_id}</code>: Updates an existing style asset.</li>
+                            <li><code>DELETE /brand-stylings/{styling_id}/assets/{asset_id}</code>: Deletes a style asset.</li>
+                        </ul>
+                        
+                        <h4>Variants</h4>
+                        <ul>
+                            <li><code>POST /brand-stylings/{styling_id}/assets/{asset_id}/variants/</code>: Creates a new responsive variant for an asset.</li>
+                            <li><code>PUT /brand-stylings/{styling_id}/assets/{asset_id}/variants/{variant_id}</code>: Updates an existing variant.</li>
+                            <li><code>DELETE /brand-stylings/{styling_id}/assets/{asset_id}/variants/{variant_id}</code>: Deletes a variant.</li>
+                        </ul>
+
+                        <h4>Exports & Docs</h4>
+                        <ul>
+                            <li><code>GET /brand/{styling_id}/export/{format}</code>: Exports assets in different formats, such as <code>json</code> or <code>scss</code>.</li>
+                            <li><code>GET /brand/{styling_id}/docs</code>: Generates and returns an HTML documentation page for the brand styling.</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="help-section" id="about-section">
+                            <h3 class="section-title">About</h3>
+                            <p style="line-height: 1.5;">
+                                Branding Server 1.2.5<br>
+                                Copyright &copy; Pete Steege Music, 2025. All rights reserved.
+                            </p>
+                            <p>
+                                For more information visit: <a href="https://petesteege.com/dev" target="_blank" rel="noopener noreferrer">https://petesteege.com/dev</a>
+                            </p>
+                        </div>
+                    
+                </div>
+
+                <div id="settings-screen" class="content-view hidden">
+                    <h2 class="view-title">Settings</h2>
+                    <p class="view-description">Manage the application database and backups.</p>
+
+                    <div class="settings-section">
+                        <h3 class="section-title">Current Database</h3>
+                        <div class="db-info-card">
+                            <p><strong>Path:</strong> <code id="db-info-path">Loading...</code></p>
+                            <p id="db-info-date">Loading...</p>
+                            <p><strong>Records:</strong> <span id="db-info-records">Loading...</span></p>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3 class="section-title">Data Management</h3>
+                        <div class="list-box-container">
+                            <label for="items-list-box">Available Backups:</label>
+                            <select id="items-list-box" size="8" class="list-box">
+                                </select>
+                        </div>
+
+                        <div class="button-group">
+                            <button id="backup-btn" class="btn btn-primary" title="Create a backup of the current database"><i class="fas fa-save"></i> Backup Now</button>
+                            <button id="create-new-db-btn" class="btn btn-primary" title="Backup the current DB and start fresh"><i class="fas fa-eraser"></i> Create New / Clear</button>
+                            <button id="restore-btn" class="btn btn-primary" title="Restore the application state from the selected backup"><i class="fas fa-undo"></i> Restore Selected</button>
+                            <button id="download-selected-btn" class="btn btn-primary" title="Download the selected backup file"><i class="fas fa-download"></i> Download Selected</button>
+                            <button id="delete-backup-btn" class="btn btn-primary" title="Permanently delete the selected backup file"><i class="fas fa-trash-alt"></i> Delete Selected</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3 class="section-title">API key </h3>
+                        
+                            <!-- api settings here -->
+
+                    </div>
+
+                    
+                </div>
+
+                <div id="site-view" class="content-view hidden">
+                    <div class="view-header">
+                        <h2 class="view-title" id="site-name">Site Name</h2>
+                        <div class="view-actions">
+                            <button class="btn primary-btn" id="add-brand-styling-btn">
+                                Add Brand Styling
+                            </button>
+                            <button type="button" class="btn primary-btn" id="edit-site-btn">
+                                Edit Site
+                            </button>
+                             <button class="btn danger-btn" id="delete-site-btn">
+                                Delete Site
+                            </button>
+                        </div>
+                    </div>
+                    <p id="site-description" class="view-description">Site description goes here.</p>
+
+                    <h3 class="section-title">Brand Stylings</h3>
+                    <div id="brand-stylings-list" class="card-grid">
+                        </div>
+                </div>
+
+                <div id="brand-styling-view" class="content-view hidden">
+                    <div class="view-header">
+                                <div class="view-actions">
+                            <button class="btn tertiary-btn" id="add-asset-btn">
+                                Add Asset
+                            </button>
+                            <button class="btn tertiary-btn" id="view-css-btn">
+                                View CSS
+                            </button>
+                            <button class="btn tertiary-btn" id="export-btn">
+                                Export
+                            </button>
+                            <button class="btn tertiary-btn" id="view-docs-btn">
+                                View Docs
+                            </button>
+                            <button class="btn tertiary-btn" id="edit-brand-styling-btn">
+                                Edit
+                            </button>
+                            <button class="btn tertiary-btn" id="delete-brand-styling-btn">
+                                Delete
+                            </button>
+                        </div>
+                        <div>
+                            <h2 class="view-title" id="brand-styling-name">Brand Styling Name</h2>
+                            <p class="view-subtitle" id="brand-styling-site">Site: Site Name</p>
+                        </div>
+
+                    </div>
+
+                    <div class="general-section">
+
+                            <div class="description-section">
+                                <div class="header-sub-section">
+                                        <div class="section-title" id="description-header">
+                                            Description
+                                        </div>
+                                        <div class="btn edit-description-btn" id="edit-description-btn">
+                                            edit
+                                        </div>
+                                </div>
+
+                                    <div class="description-info" id="description-info">
+                                        <p id="brand-styling-description">This is the description of the brand styling.</p>
+                                    </div>
+                                
+                            </div>
+
+                            <div class="asset-section inheritance-section">
+                                <div class="header-sub-section" id="inheritance-title">Inheritance</div>
+                                <div class="inheritance-info" id="inheritance-info">
+                                    <p>Select a master brand to inherit styles from, or leave empty to make this a master brand.</p>
+                                    <div class="form-group inheritance-row">
+                                        <label for="edit-brand-inherit-from-select">Inherits From (Optional)</label>
+                                        <div class="inheritance-controls">
+                                            <select id="edit-brand-inherit-from-select">
+                                                <option value="">None (Master Brand)</option>
+                                                </select>
+                                            <button class="btn secondary-btn" id="view-master-brand-btn" style="display: none;">
+                                                View ..
+                                            </button>
+                                        </div>
+                                        <p class="url-helper-text"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="asset-section css-url-section">
+                            <h3 class="header-sub-section">CSS Import URL</h3>
+                            <div class="copy-container url-display">
+                                <code id="styling-css-url"></code>
+                                <button class="icon-btn copy-icon" id="copy-styling-css-url-btn" title="Copy CSS URL">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                            </div>
+                            <p class="url-helper-text">Use this URL to import the styling in your projects (e.g., in a `<link>` tag or `@import` rule).</p>
+                        </div>
+
+                        <div class="css-elements-container" id="css-elements-background">
+
+
+                <div class="css-elements-section">
+                    <div class="section-header">
+                        
+                        <h2 class="section-title" id="section-title-vars">
+                            Colors<br>
+                            <div style="margin-left: 20px; margin-top:10px !important;">:root {</div>
+                        </h2>
+                        <div class="section-actions">
+                            <button class="btn secondary-btn" id="add-color-group">Add Group..</button>
+                        </div>    
+                    </div>
+                    
+                    <div id="colors-container" data-type="color">
+                        </div>
+                    <div class="variable-brace-close">}</div>
+                </div>
+
+                <div class="css-elements-section">
+                    <div class="section-header">
+                        <h2 class="section-title" id="section-title-vars">
+                            Images<br>
+                            <div style="margin-left: 20px; margin-top:10px !important;">:root {</div>
+                        </h2>                
+                        <div class="section-actions">
+                            <button class="btn secondary-btn" id="add-image-group">Add Group..</button>
+                        </div>
+                        
+                    </div>
+                    
+                    <div id="images-container" data-type="image">
+                        </div>
+                    <div class="variable-brace-close">}</div>
+                </div>
+                
+                <div class="css-elements-section">
+                    <div class="section-header">
+                        <h2 class="section-title" id="section-title-vars">
+                            Typography<br>
+                            <div style="margin-left: 20px; margin-top:10px !important;">:root {</div>
+                        </h2>       
+                        <div class="section-actions">         
+                            <button class="btn secondary-btn" id="add-typography-group">Add Group..</button>
+                        </div>
+                    </div>
+                    
+                    <div id="typography-container" data-type="typography">
+                        </div>
+                    <div class="variable-brace-close">}</div>
+                </div>
+                
+                <div class="css-elements-section">
+                    <div class="section-header">
+                        <h2 class="section-title" id="section-title-vars">
+                            Dimensions<br>
+                            <div style="margin-left: 20px; margin-top:10px !important;">:root {</div>
+                        </h2>               
+                        <div class="section-actions"> 
+                            <button class="btn secondary-btn" id="add-dimension-group">Add Group..</button>
+                        </div>
+                    </div>
+                    
+                    <div id="dimensions-container" data-type="dimension">
+                        </div>
+                <div class="variable-brace-close">}</div>
+                </div>
+
+                <div class="css-elements-section">
+                    <div class="section-header">
+                        <h2 class="section-title" id="section-title-vars">
+                            Selector<br>
+                            <br>
+                            </h2>     
+                            <div class="section-actions">           
+                                <button class="btn secondary-btn" id="add-selector-group">Add Group...</button>
+                            </div>
+                    </div>
+                    
+                    <div id="selector-container" data-type="selector">
+                        </div>
+                    
+                </div>
+
+                <div class="css-elements-section">
+                    <div class="section-header">
+                        <h2 class="section-title" id="section-title-vars">
+                            Other<br>
+                            <div style="margin-left: 20px;  margin-top:10px !important;">:root {</div>
+                            </h2>   
+                            <div class="section-actions">             
+                                <button class="btn secondary-btn" id="add-other-group">Add Group...</button>
+                            </div>
+                    </div>
+                    
+                    <div id="other-container" data-type="other">
+                        </div>
+                    <div class="variable-brace-close">}</div>
+                </div>
+
+
+    </div>
+
+    
+    
+    <div class="css-output">
+        <h2>
+            Generated CSS
+            <button class="btn btn-secondary" id="copy-css">Copy CSS</button>
+        </h2>
+        <pre class="css-code" id="css-output">:root {
+}</pre>
+    </div>
+                </div>
+
+                <div id="css-view" class="content-view hidden">
+                </div>
+
+                <div class="console-panel">
+                    <div class="console-header">
+                        <h2 class="console-title">Console</h2>
+                    </div>
+                    <div id="console-output" class="console-output"></div>
+                </div>
+
+            </div> 
+
+        </main>
+
+    </div>
+
+    <div id="modal-backdrop" class="modal-backdrop hidden">
+        <div id="new-site-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3 class="modal-title">Create New Site</h3>
+                <form id="new-site-form" >
+                    <div class="form-group">
+                        <label for="site-name-input">Site Name</label>
+                        <input type="text" id="site-name-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="site-description-input">Description (optional)</label>
+                        <textarea id="site-description-input" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary-btn close-modal">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn primary-btn">
+                            Create
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="edit-site-modal" class="modal hidden">
+            <div class="modal-content">
+              <h3 class="modal-title">Edit Site</h3>
+              <form id="edit-site-form" onsubmit="return false;">
+                <input type="hidden" id="edit-site-id">
+                <div class="form-group">
+                  <label for="edit-site-name-input">Site Name</label>
+                  <input type="text" id="edit-site-name-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="edit-site-description-input">Description (optional)</label>
+                  <textarea id="edit-site-description-input" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                  <button type="button" class="btn secondary-btn close-modal">
+                    Cancel
+                  </button>
+                  <button type="button" class="btn primary-btn" id="edit-site-save-btn">
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+
+          <div id="new-brand-styling-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3 class="modal-title">Create Brand Styling</h3>
+                <form id="new-brand-styling-form">
+                     <input type="hidden" id="new-brand-styling-site-id">
+                    <div class="form-group">
+                        <label for="brand-name-input">Name</label>
+                        <input type="text" id="brand-name-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="brand-description-input">Description (optional)</label>
+                        <textarea id="brand-description-input" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary-btn close-modal">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn primary-btn">
+                            Create
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+
+        <div id="edit-brand-styling-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3 class="modal-title">Edit Brand Styling</h3>
+                <form id="edit-brand-styling-form">
+                     <input type="hidden" id="edit-brand-styling-id">
+                     <input type="hidden" id="edit-brand-styling-site-id">
+                    <div class="form-group">
+                        <label for="edit-brand-styling-name-input">Name</label>
+                        <input type="text" id="edit-brand-styling-name-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-brand-styling-description-input">Description (optional)</label>
+                        <textarea id="edit-brand-styling-description-input" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary-btn close-modal">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn primary-btn" id="edit-brand-styling-save-btn">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="new-asset-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3 class="modal-title">Add Asset</h3>
+                <form id="new-asset-form" >
+                    <input type="hidden" id="new-asset-styling-id">
+                    <div class="form-group">
+                        <label for="asset-name-input">Name</label>
+                        <input type="text" id="asset-name-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="asset-type-select">Asset Type</label>
+                        <select id="asset-type-select" required>
+                            <option value="">Select asset type</option>
+                            <option value="color">Color</option>
+                            <option value="image">Image</option>
+                            <option value="font">Typography</option>
+                            <option value="dimension">Dimension</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+<div id="color-fields" class="hidden">
+    <div class="form-group">
+        <label for="color-value-input">Color Value</label>
+        <input type="color" id="color-value-input">
+    </div>
+    <div class="form-group">
+        <div class="checkbox-container">
+            <input type="checkbox" id="color-important-checkbox" class="styled-checkbox importance-checkbox">
+            <label for="color-important-checkbox">Important (!important)</label>
+        </div>
+    </div>
+</div>
+
+<div id="image-fields" class="hidden">
+    <div class="form-group">
+        <label for="image-file-input">Image File</label>
+        <input type="file" id="image-file-input" accept="image/*">
+    </div>
+    <div class="form-group">
+        <div class="checkbox-container">
+            <input type="checkbox" id="image-important-checkbox" class="styled-checkbox importance-checkbox">
+            <label for="image-important-checkbox">Important (!important)</label>
+        </div>
+    </div>
+</div>
+
+<div id="generic-fields" class="hidden">
+    <div class="form-group">
+        <label for="asset-value-input">Value</label>
+        <input type="text" id="asset-value-input">
+    </div>
+    <div class="form-group">
+        <div class="checkbox-container">
+            <input type="checkbox" id="generic-important-checkbox" class="styled-checkbox importance-checkbox">
+            <label for="generic-important-checkbox">Important (!important)</label>
+        </div>
+    </div>
+</div>
+
+                    <div class="form-group">
+                        <label for="asset-description-input">Description (optional)</label>
+                        <textarea id="asset-description-input" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary-btn close-modal">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn primary-btn">
+                            Add Asset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+         <div id="edit-asset-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3 class="modal-title">Edit Asset</h3>
+                <form id="edit-asset-form" >
+                    <input type="hidden" id="edit-asset-id">
+                    <input type="hidden" id="edit-asset-styling-id">
+                    <div class="form-group">
+                        <label for="edit-asset-name-input">Name</label>
+                        <input type="text" id="edit-asset-name-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-asset-type-display">Asset Type</label>
+                        <input type="text" id="edit-asset-type-display" disabled>
+                    </div>
+
+                    <div id="edit-color-fields" class="hidden">
+                        <div class="form-group">
+                            <label for="edit-color-value-input">Color Value</label>
+                            <input type="color" id="edit-color-value-input">
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="edit-asset-important-checkbox" class="styled-checkbox">
+                                <label for="edit-asset-important-checkbox">Important (!important)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="edit-image-fields" class="hidden">
+                         <div class="form-group">
+                            <label>Current Image:</label>
+                            <img id="edit-image-preview" src="" alt="Current Image" class="image-preview-thumb">
+                         </div>
+                        <div class="form-group">
+                            <label for="edit-image-file-input">Replace Image (optional)</label>
+                            <input type="file" id="edit-image-file-input" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="edit-asset-important-checkbox" class="styled-checkbox">
+                                <label for="edit-asset-important-checkbox">Important (!important)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="edit-generic-fields" class="hidden">
+                        <div class="form-group">
+                            <label for="edit-asset-value-input">Value</label>
+                            <input type="text" id="edit-asset-value-input">
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="edit-asset-important-checkbox" class="styled-checkbox">
+                                <label for="edit-asset-important-checkbox">Important (!important)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-asset-description-input">Description (optional)</label>
+                        <textarea id="edit-asset-description-input" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary-btn close-modal">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn primary-btn">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="variant-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3 class="modal-title">Add Responsive Variant</h3>
+                <form id="variant-form" onsubmit="event.preventDefault(); return false;">
+                    <input type="hidden" id="variant-asset-id">
+                    <input type="hidden" id="variant-id">
+                    
+                    <div class="form-group">
+                        <label for="original-variant-breakpoint">Breakpoint</label>
+                        <select id="original-variant-breakpoint" required>
+                            <option value="mobile">Mobile (max-width: 767px)</option>
+                            <option value="tablet">Tablet (768px - 1023px)</option>
+                            <option value="desktop">Desktop (min-width: 1024px)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="variant-value">Value</label>
+                        <input type="text" id="variant-value" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="variant-important-checkbox" class="styled-checkbox">
+                            <label for="variant-important-checkbox">Important (!important)</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary-btn close-modal">Cancel</button>
+                        <button type="button" class="btn primary-btn">Save Variant</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="toast" class="toast">
+        <span id="toast-message">Notification message</span>
+    </div>
+
+
+
+    <div id="add-group-modal" class="modal-backdrop hidden">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Add Color Group</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="group-name">Group Name</label>
+                <input type="text" id="group-name" placeholder="Enter group name">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancel-modal">Cancel</button>
+            <button type="button" class="button-primary" id="save-group">Add Group</button>
+        </div>
+    </div>
+    </div>
+
+    <div id="add-variable-modal" class="modal-backdrop hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Variable</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="variable-name">Variable Name</label>
+                    <input type="text" id="variable-name" placeholder="Enter variable name (e.g. --color-name)">
+                </div>
+                <div class="form-group" id="value-container">
+                    </div>
+                <div class="form-group">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="variable-important">
+                        <label for="variable-important">Add !important</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-variable-modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="save-variable">Add Variable</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-variant-modal" class="modal-backdrop hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Responsive Variant</h3>
+            </div>
+            <div class="modal-body">
+                <form id="variant-form" onsubmit="event.preventDefault(); return false;">
+                    <input type="hidden" id="variant-asset-id">
+                    <input type="hidden" id="variant-id">
+                    <div class="form-group">
+                        <label for="variant-breakpoint">Breakpoint</label>
+                        <select id="variant-breakpoint">
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="variant-value">Value</label>
+                        <input type="text" id="variant-value" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="variant-important-checkbox" class="styled-checkbox">
+                            <label for="variant-important-checkbox">Important (!important)</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancel-variant-modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="save-variant">Add Variant</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-class-rule-modal" class="modal-backdrop hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add CSS Selector</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="class-rule-selector">Selector</label>
+                    <input type="text" id="class-rule-selector" placeholder="e.g., .my-class, #my-id">
+                </div>
+                <div class="form-group">
+                    <label for="class-rules-input">CSS Rules</label>
+                    <div class="css-input-container">
+                        <div id="class-rules-input" rows="10">
+                                <div id="class-rules-input" class="ace-editor-container"></div>
+                            </div>
+                </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancel-class-rule-modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="save-class-rule">Add Rule</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<script src="/scripts/html-templates/templates.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/ace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/mode-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/theme-idle_fingers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/ext-language_tools.min.js"></script>
+<script src="https://www.unpkg.com/ace-linters@latest/build/ace-linters.js"></script>
+
+
+<script src="/scripts/custom-css-rule-editor.js"></script> 
+<script src="/scripts/modal-handlers.js"></script>
+<script src="/scripts/toast-handlers.js"></script>
+<script src="/scripts/dom-elements.js"></script>
+<script src="/scripts/helpers.js"></script>
+<script src="/scripts/validation-handlers.js"></script>
+<script src="/scripts/ui/variable-previews.js"></script> <script src="/scripts/ui/tree-handlers.js"></script>
+<script src="/scripts/ui/tree-operations.js"></script>
+<script src="/scripts/api.js"></script>
+<script src="/scripts/css-core.js"></script>
+<script src="/scripts/modal-html.js"></script>
+<script src="/scripts/event-handlers.js"></script>
+<script src="/scripts/inheritance-handlers.js"></script>
+<script src="/scripts/ui/ui-renderings.js"></script> <script src="/scripts/ui/console.js"></script>
+
+<script src="/scripts/codeeditor/css-config.js"></script>
+<script src="/scripts/codeeditor/css-parser.js"></script>
+<script src="/scripts/codeeditor/editor-setup.js"></script>
+<script src="/scripts/codeeditor/css-variable-support.js"></script>
+<script src="/scripts/codeeditor/editor-features.js"></script>
+<script src="/scripts/codeeditor/editor-operations.js"></script>
+<script src="/scripts/codeeditor/css-ui.js"></script>
+
+<script src="public/themes/one_dark.js"></script>
+
+<script src="/scripts/main.js"></script>
+<script src="/scripts/init.js"></script> <script src="/scripts/ui/ui-elements.js"></script>
+<script src="/scripts/ui/ui-updaters.js"></script>
+<script src="/scripts/html-templates/variant-handlers.js"></script>
+<script src="/scripts/backup-system.js"></script>
+
+</body>
+</html>

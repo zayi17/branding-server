@@ -1,0 +1,10 @@
+/* CSS for Brand Styling: Catalogue (ID: 4) */
+/* Inherits from Master Brand: Default Site (ID: 2) */
+@import url('http://localhost:8000/brand/2/css');
+
+:root {
+/* GROUP: General */
+  --breakpoint-mobile: 767px; /* TYPE: dimension */
+  --breakpoint-tablet: 1023px; /* TYPE: dimension */
+  --breakpoint-desktop: 1024px; /* TYPE: dimension */
+}

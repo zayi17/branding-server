@@ -1,0 +1,18 @@
+# In Dockerfile.frontend
+
+# Use the official Apache web server image
+FROM httpd:2.4-alpine
+
+# Copy all frontend files from the 'webapp' directory to the container's web root
+COPY ./webapp/ /usr/local/apache2/htdocs/
+
+# Copy the startup script into the container
+COPY entrypoint.sh /usr/local/bin/ 
+RUN chmod +x /usr/local/bin/entrypoint.sh 
+
+# Set the startup script as the entrypoint
+ENTRYPOINT ["entrypoint.sh"] 
+
+# The default command for the httpd image is to start the server.
+# We will call it from our entrypoint script.
+CMD ["httpd-foreground"]a

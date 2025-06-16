@@ -1,0 +1,70 @@
+/* In your CSS file (e.g., css/styles.css) */
+
+/* Style for the icon cell */
+.inheritance-icon-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; /* Adjust width as needed */
+    flex-shrink: 0; /* Prevent shrinking */
+    margin-right: 8px; /* Space between icon and content */
+}
+
+/* Base style for inheritance icons */
+.inheritance-icon-cell .inheritance-icon {
+    font-size: 18px; /* Adjust icon size */
+    vertical-align: middle;
+}
+
+/* Basic color for inherited icon */
+.inheritance-icon-cell .inheritance-icon.inherited {
+    color: var(--color-primary); /* Example: use your primary color */
+}
+
+/* Basic color for overridden icon */
+.inheritance-icon-cell .inheritance-icon.overridden {
+    color: var(--color-accent); /* Example: use your accent color */
+}
+
+/* Hide the old Font Awesome icons added by enhanceBrandStylingViewWithInheritance */
+/* This is a temporary measure. We will remove the JS that adds these later. */
+.inherited-indicator,
+.overridden-indicator {
+    display: none !important;
+}
+
+/* Remove the old pencil icons from action buttons (if they were used for this purpose) */
+/* Check your HTML and other JS to confirm if this selector is correct */
+.variable-actions .action-button i.fas.fa-pencil-alt {
+     display: none;
+}
+
+
+
+
+/* step 2 */
+
+/* In your CSS file (e.g., css/styles.css) */
+
+/* Inherited - simple (can keep the previous inherited color or adjust) */
+.inheritance-icon-cell .inheritance-icon.inherited-simple {
+    color: var(--color-text-secondary); /* Example: a neutral gray */
+}
+
+/* Overridden - Green (South East icon) */
+.inheritance-icon-cell .inheritance-icon.overridden-green {
+    color: var(--col-green); /* Green color */
+}
+
+/* Overridden - Orange (North West icon) */
+.inheritance-icon-cell .inheritance-icon.overridden-orange {
+    color: var(--col-orange); /* Orange color */
+}
+
+/* Ensure basic .inheritance-icon styling doesn't override these */
+/* (Already covered by adding more specific selector) */
+
+/* You can optionally add hover/tooltip styles if needed */
+.inheritance-icon-cell .inheritance-icon {
+    cursor: help; /* Indicate that it provides information */
+}

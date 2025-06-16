@@ -1,0 +1,146 @@
+/* previews.css - Styles for variable preview functionality */
+
+.preview-modal-content {
+    background-color: var(--surface-color, #2c2c2c);
+    border-radius: 6px;
+    width: 80%;
+    max-width: 900px;
+    max-height: 90vh;
+    margin: 5vh auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.preview-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color, #444);
+}
+
+.preview-modal-title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--text-color, #fff);
+}
+
+
+.preview-close-btn {
+    background: none;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--text-color, #fff);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    border: 1px solid whitesmoke;
+}
+
+.preview-close-btn:hover {
+    opacity: 1;
+}
+
+.preview-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    max-height: calc(80vh - 130px);
+}
+
+
+
+.preview-modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color, #444);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preview-info-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 16px;
+    font-size: 14px;
+}
+
+.preview-info-label {
+    font-weight: bold;
+    color: var(--text-secondary, #aaa);
+}
+
+.preview-info-value {
+    color: var(--text-color, #fff);
+    word-break: break-all;
+}
+
+.preview-hint {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 2px 5px;
+    border-radius: 2px;
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+
+.preview-image {
+    max-width: 100%;
+    max-height: calc(80vh - 170px);
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.variable-preview img,
+.variant-preview img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    width: 100%;
+}
+
+
+.variable-preview, .variant-preview {
+    height: 24px;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    position: relative;
+
+    border: 1px solid #2d2d2d;
+}
+
+
+
+
+.variable-preview:hover .preview-hint
+.variant-preview:hover .preview-hint {
+    opacity: 1;
+}
+
+
+.variable-preview.picker-disabled .color-picker-input,
+ .varaint-preview.picker-disabled .color-picker-input{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.variable-preview.picker-disabled .color-preview 
+.variant-preview.picker-disabled .color-preview{
+    cursor: default; /* Indicate swatch isn't clickable to open picker */
+}
+

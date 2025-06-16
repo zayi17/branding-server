@@ -1,0 +1,174 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Default Site - Style Guide</title>
+        <link rel="stylesheet" href="/brand/2/css">
+        <style>
+            body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; margin: 0; padding: 2rem; line-height: 1.6; background-color: #fdfdfd; color: #333; }
+            h1, h2, h3 { margin-top: 2.5em; border-bottom: 1px solid #eee; padding-bottom: 8px; font-weight: 600; }
+            h2 { font-size: 1.8em; } h3 { font-size: 1.4em; border-bottom-style: dashed; }
+            .container { max-width: 1200px; margin: 0 auto; }
+            .header { border-bottom: 1px solid #ddd; padding-bottom: 20px; margin-bottom: 40px; text-align: center; }
+            .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
+            .item { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.07); background: white; transition: transform 0.2s ease-in-out; }
+            .item:hover { transform: translateY(-3px); }
+            .preview { height: 120px; display: flex; align-items: center; justify-content: center; background-color: #f5f5f5; border-bottom: 1px solid #eee; }
+            .preview img { max-width: 100%; max-height: 120px; object-fit: contain; }
+            .info { padding: 15px; }
+            .info p { margin: 5px 0; color: #666; font-size: 0.9em;}
+            table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.07); border-radius: 8px; overflow: hidden;}
+            table th, table td { text-align: left; padding: 14px; border-bottom: 1px solid #f0f0f0; }
+            table tr:last-child td { border-bottom: none; }
+            table th { background-color: #f9f9f9; font-weight: 600; }
+            .asset-value code { background-color: #eef; color: #55d; padding: 3px 6px; border-radius: 4px; font-size: 0.95em;}
+            .variants-info { margin-top: 12px; padding-top: 12px; border-top: 1px dashed #ccc; }
+            .variants-info ul { margin: 8px 0 0 0; padding-left: 0; list-style-type: none; font-size: 0.9em; color: #555; }
+            .variants-info li { margin-bottom: 6px; display: flex; align-items: center; }
+            .variants-info em { margin-right: 5px; min-width: 70px; display: inline-block; text-align: right; }
+            .variant-swatch { display: inline-block; width: 14px; height: 14px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.15); margin-right: 8px; flex-shrink: 0; }
+            .selector-block { margin-bottom: 3em; }
+            code { font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Courier New', monospace; }
+            pre > code { display: block; background-color: #2d2d2d; color: #f1f1f1; padding: 15px; border-radius: 4px; white-space: pre-wrap; }
+            
+            /* --- STYLES FOR THE NEW PDF BUTTON --- */
+            .print-button {
+                display: inline-block;
+                margin: 1rem 0;
+                padding: 8px 16px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #f0f0f0;
+                cursor: pointer;
+                font-size: 0.9em;
+                font-weight: 500;
+            }
+            .print-button:hover {
+                background-color: #e0e0e0;
+                border-color: #bbb;
+            }
+            /* --- HIDE BUTTON AND OTHER UI ELEMENTS FOR PRINTING --- */
+            @media print {
+                body { padding: 1cm; }
+                .print-button, #css-import-section {
+                    display: none !important;
+                }
+                .item, table {
+                    page-break-inside: avoid;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Default Site - Style Guide</h1>
+                <p>Site: Pete Steege Music</p>
+                <p>default site styling</p>
+                <button onclick="window.print()" class="print-button">Download as PDF</button>
+            </div>
+    <h2>Colors</h2><div class="grid">
+                    <div class="item">
+                        <div class="preview" style="background-color: #2a5c9d;"></div>
+                        <div class="info">
+                            <strong>--col-bg</strong><br>
+                            <code>#2a5c9d</code>
+                            <p>red background</p>
+                            <div class="variants-info"><strong>Variants:</strong><ul><li><span class="variant-swatch" style="background-color:#6f7485;"></span><em>desktop:</em> <code>#6f7485</code></li><li><span class="variant-swatch" style="background-color:#1b1c22;"></span><em>test:</em> <code>#1b1c22</code></li></ul></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="preview" style="background-color: #080808;"></div>
+                        <div class="info">
+                            <strong>--col-bg-copy</strong><br>
+                            <code>#080808</code>
+                            <p></p>
+                            <div class="variants-info"><strong>Variants:</strong><ul><li><span class="variant-swatch" style="background-color:#121212;"></span><em>desktop:</em> <code>#121212</code></li></ul></div>
+                        </div>
+                    </div></div><h2>Images</h2><div class="grid">
+                        <div class="item">
+                            <div class="preview"><img src="https://content.petesteege.com/web/logos/psm_logo_square_1.png" alt="--logo-main"></div>
+                            <div class="info">
+                                <strong>--logo-main</strong><br>
+                                <code>url('https://content.petesteege.com/web/logos/psm_logo_square_1.png')</code>
+                                <p>main logo image</p>
+                                <div class="variants-info"><strong>Variants:</strong><ul><li><em>mobile:</em> <code>url('https://content.petesteege.com/web/logos/psm_logo_square_1.png')</code></li></ul></div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="preview"><img src="https://content.petesteege.com/web/logos/psm_logo_square_1.png" alt="--logo-main-copy"></div>
+                            <div class="info">
+                                <strong>--logo-main-copy</strong><br>
+                                <code>url('https://content.petesteege.com/web/logos/psm_logo_square_1.png')</code>
+                                <p></p>
+                                
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="preview"><img src="https://content.petesteege.com/web/logos/psm_logo_square_1.png" alt="--logo-main-large"></div>
+                            <div class="info">
+                                <strong>--logo-main-large</strong><br>
+                                <code>var(--logo-main)</code>
+                                <p></p>
+                                
+                            </div>
+                        </div></div><h2>Dimensions</h2><table><thead><tr><th>Name</th><th>Value</th><th>Description</th></tr></thead><tbody>
+                    <tr>
+                        <td>--breakpoint-desktop</td>
+                        <td class="asset-value"><code>1024px</code></td>
+                        <td>test test</td>
+                    </tr>
+                    <tr>
+                        <td>--breakpoint-mobile</td>
+                        <td class="asset-value"><code>767px</code></td>
+                        <td>Maximum width for mobile devices</td>
+                    </tr>
+                    <tr>
+                        <td>--breakpoint-tablet</td>
+                        <td class="asset-value"><code>1023px</code></td>
+                        <td>Maximum width for tablet devices</td>
+                    </tr>
+                    <tr>
+                        <td>--breakpoint-test</td>
+                        <td class="asset-value"><code>200px</code></td>
+                        <td></td>
+                    </tr></tbody></table><h2>Selectors</h2><div class='selector-block'><h3><code>.logo-main</code></h3><table><thead><tr><th>Property</th><th>Value</th><th>Description</th></tr></thead><tbody>
+                        <tr>
+                            <td>height</td>
+                            <td class="asset-value"><code>var(--var-var)</code></td>
+                            <td>test</td>
+                        </tr>
+                        <tr>
+                            <td>image</td>
+                            <td class="asset-value"><code>var(--logo-main)</code></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td class="asset-value"><code>80px</code></td>
+                            <td></td>
+                        </tr></tbody></table></div><div class='selector-block'><h3><code>.some-class</code></h3><table><thead><tr><th>Property</th><th>Value</th><th>Description</th></tr></thead><tbody>
+                        <tr>
+                            <td>top</td>
+                            <td class="asset-value"><code>500px</code></td>
+                            <td></td>
+                        </tr></tbody></table></div><h2>Other Variables</h2><table><thead><tr><th>Name</th><th>Type</th><th>Value</th><th>Description</th></tr></thead><tbody>
+                    <tr>
+                        <td>--test</td>
+                        <td>other</td>
+                        <td class="asset-value"><code>50fr</code></td>
+                        <td></td>
+                    </tr></tbody></table>
+            <div id="css-import-section">
+                <h2>CSS Import</h2>
+                <p>Use the following snippet to include these styles in your project:</p>
+                <pre><code id="css-import-code">@import url('http://macpro:8000/brand/2/css');</code></pre>
+                <p>Or via a link tag:</p>
+                <pre><code id="css-link-code">&lt;link rel="stylesheet" href="http://macpro:8000/brand/2/css"&gt;</code></pre>
+            </div>
+        </div>
+    </body>
+    </html>
+    

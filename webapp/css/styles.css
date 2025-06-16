@@ -1,0 +1,1595 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300&display=swap');
+
+:root { /* Or your theme-specific root */
+    --text-color: #cccccc; /* Your default text color */
+    --color-class-selector: #569cd6;    /* Example: Blue for selector */
+    --color-id-selector: #4ec9b0;       /* Example: Teal for IDs */
+    --color-pseudo-selector: #c586c0;   /* Example: Purple for pseudo elements/selector */
+    --color-attribute-selector: #ce9178;/* Example: Orange for attributes */
+    --color-universal-selector: #808080;/* Example: Grey for universal */
+    --color-tag-selector: #dcdcaa;      /* Example: Yellow-ish for tags */
+    /* Add other theme variables as needed */
+
+    /* Dark Theme Colors (inspired by Gemini) */
+    --bg-primary: #181818; /* Dark background */
+    --bg-secondary: #1e1e1e; /* Slightly lighter background for cards, etc. */
+    --bg-hover: #3c3c3c; /* Hover background */
+    --text-primary: #cbcbcb; /* Light text for main content */
+    --text-secondary: #a0a0a0; /* Greyed out text */
+    --accent-color: #3c3c3c; /* Google Blue */
+    --accent-hover: #979797; /* Darker Google Blue */
+    --border-color: rgb(94,94,94); /* Darker border */
+    --sidebar-bg: #151515; /* Sidebar background */
+    --header-bg: #222222; /* Header background */
+    --code-bg: #333333; /* Code block background */
+    --code-text: #cccccc; /* Code text color */
+    --danger-color: #e57373; /* Red for delete actions */
+    --warning-color: #e5b773; /* Red for delete actions */
+    --danger-hover: #ef5350; /* Darker red */
+    --info-color: #3b9ff0; /* Bluish for info messages */
+    --sub-header-col:#3c3c3c;
+
+    /* breakpoints */
+    --bp-col-mobile: #b95e59;
+    --bp-col-tablet: #58995b;
+    --bp-col-desktop:#ce9e5b;
+    --bp-col-other: #37637e;
+
+    /* preview colours */
+    --p-col-other: #5177C3;
+
+
+
+    /* Spacing */
+    --spacing-unit: 4px;
+    --padding-small: calc(var(--spacing-unit) * 1.5); /* 9px */
+    --padding-medium: calc(var(--spacing-unit) * 2); /* 12px */
+    --padding-large: calc(var(--spacing-unit) * 3); /* 18px */
+    --margin: 20px;
+    --sub-section-height: 30px;
+  
+    /* Header Height */
+    --header-height: 80px; /* Define a variable for header height */
+    
+    --sidebar-width: 300px;
+
+    /* Border Radius */
+    --border-radius: 7px;
+    --border-radius-buttons: 2px;
+    /* Box Shadow */
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    /* buttons */ 
+
+}
+
+/* Add these to your CSS file, e.g., editor-styles.css */
+:root {
+    --variable-valid-bg: #e6ffe6; /* A light pastel green */
+    --variable-invalid-bg: #ffe6e6; /* A light pastel red (using your --danger-color if it's suitable for a background is also an option) */
+}
+
+.value-input-var-exists {
+color: #7babf2 !important;   
+ transition: color .1s ease;
+}
+
+.value-input-var-not-exists {
+    color: var(--warning-color) !important;
+    transition: color .1s ease;
+}
+
+
+input.editable-field.variable-value-input.value-input-error-circular {
+    color: var(--danger-color) !important;
+    transition: color .1s ease;
+}
+
+
+body {
+    font-family: 'Zen Kaku Gothic Antique', sans-serif !important;
+    font-weight:100 !important;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Updated for fixed header/sidebar */
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Make body take full viewport height */
+    overflow: hidden; /* Prevent scrolling on the body */
+}
+
+/* Layout */
+.app-header {
+    display: flex;
+    color: var(--text-primary);
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    z-index: 10;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header-content {
+display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    padding: 0 var(--padding-medium);
+    /* flex-direction: row; */
+    /* flex-wrap: nowrap; */
+    gap: var(--padding-large);
+    align-items: center;
+    align-content: center;
+    width: 100% !important;
+}
+
+.header-left {
+    display: flex
+;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+}
+
+
+.app-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.app-container {
+    display: flex;
+    flex: 1;
+    /* Updated to position below fixed header and fill remaining height */
+    margin-top: var(--header-height); /* Push container down by header height */
+    height: calc(100vh - var(--header-height)); /* Fill remaining viewport height */
+    overflow: hidden; /* Prevent this container from scrolling, children will manage it */
+}
+
+.sidebar {
+    width: 300px;
+    min-width: 250px;
+    border-right: 1px solid var(--border-color);
+    /* Removed overflow-y: auto from sidebar */
+    flex-shrink: 0;
+    display: flex; /* Use flex to make content scrollable */
+    flex-direction: column; /* Stack sidebar content vertically */
+    height: 100%; /* Make sidebar fill the height of app-container */
+}
+
+/* Added a wrapper for scrollable sidebar content */
+.sidebar-scrollable-content {
+     flex-grow: 1; /* Make this div fill available space */
+     overflow-y: auto; /* Enable scrolling for this content */
+     padding-top: var(--padding-medium); /* Add top padding inside the scrollable area */
+     margin-top: calc(-1 * var(--padding-medium)); /* Negative margin to offset the padding */
+}
+
+
+.main-content {
+    flex: 1;
+background-color: var(--bg-secondary);
+    /* Kept overflow-y: auto for main content */
+    overflow-y: auto;
+    /* Added overflow-x hidden if horizontal scrolling is not desired */
+    overflow-x: hidden;
+
+    height: calc(100% - 33px);
+    padding-top: 33px;
+}
+
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight:100 !important;
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 11px;
+}
+
+h2 {
+    font-size: 13px;
+    font-weight: 600;
+    font-weight:100 !important;
+    font-size: 13px;
+
+
+}
+
+h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-weight:100 !important
+
+}
+
+.view-title {
+     margin:6px var(--margin) 16px;
+     font-size: 1.8rem;
+     font-weight: 600;
+}
+
+.view-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--padding-medium);
+    display:none;
+}
+
+.section-title {
+    font-size:15px;
+    font-weight: 500;
+    margin-bottom: var(--padding-medium);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-unit);
+}
+
+.view-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--padding-large);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-xs) var(--padding-md);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--border-radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    gap: var(--padding-xs);
+    width: 170px;
+}
+
+.primary-btn {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--text-primary);
+        border: 1px solid var(--bg-active);
+}
+
+.secondary-btn:hover {
+    background-color: var(--bg-hover);
+}
+
+.danger-btn {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.danger-btn:hover {
+    background-color: var(--danger-hover);
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--spacing-unit);
+    border-radius: var(--border-radius);
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.icon-btn:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-hover);
+}
+
+.view-actions {
+    display: flex;
+ 
+    align-items: center;
+    flex-wrap: nowrap; /* Added for responsiveness */
+    border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    margin-top: 0 0 !important;
+    padding: 0 0 !important;
+    position: absolute;
+    width: calc(100vw - var(--sidebar-width));
+    background-color: #282828;
+    top: 80.3px;
+    height: var(--sub-section-height) !important;
+    min-height: var(--sub-section-height) !important;
+    max-height: var(--sub-section-height) !important;
+    background-color: var(--sub-header-col);
+    color: var(--text-secondary);
+    flex-direction: row;
+    align-content: center;
+    font-size: 15px !important;
+    z-index: 999;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: var(--padding-medium);
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-unit);
+    font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="color"],
+.form-group input[type="file"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: var(--spacing-unit);
+    border-radius: var(--border-radius-buttons);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    box-sizing: border-box; /* Ensure padding doesn't increase width */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="color"]:focus,
+.form-group input[type="file"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3); /* Accent color with transparency */
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-unit);
+    margin-top: var(--padding-medium);
+}
+
+
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--padding-large);
+    margin-top: var(--padding-large);
+}
+
+.feature-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--padding-large);
+}
+
+.feature-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+.feature-list {
+    list-style: disc;
+    margin-left: var(--padding-medium);
+    color: var(--text-secondary);
+    padding-top: var(--spacing-unit);
+}
+
+.feature-list li {
+    margin-bottom: var(--spacing-unit);
+}
+
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--padding-medium);
+}
+
+.brand-styling-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+}
+
+.brand-styling-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.brand-styling-card-header {
+    padding: var(--padding-small);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-styling-card-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.brand-styling-card-content {
+    padding: var(--padding-small);
+}
+
+.brand-styling-card-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--padding-medium);
+}
+
+.brand-styling-card-actions {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+
+.brand-styling-card-actions .btn {
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+    font-size: 0.8rem;
+}
+
+
+/* Sidebar Specific Styles */
+.sidebar-section {
+    margin-bottom: var(--padding-medium);
+    flex-shrink: 0; /* Prevent search/header from shrinking in flex column */
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-unit);
+}
+
+.sidebar-header .section-title {
+     border-bottom: none;
+     padding-bottom: 0;
+     margin-bottom: 0;
+}
+
+
+.search-box {
+    position: relative;
+    flex-shrink: 0; /* Prevent search from shrinking */
+}
+
+.search-box input {
+    width: calc(100% - 41px);
+    padding: var(--spacing-unit) var(--spacing-unit) var(--spacing-unit) calc(var(--spacing-unit) * 4); /* Adjust padding for icon */
+    border-radius: var(--border-radius-buttons);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
+}
+
+.search-icon {
+    position: absolute;
+    left: var(--padding-small);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.folder-tree { /* Added folder-tree to flex column layout */
+    flex-grow: 1; /* Make folder tree fill remaining space */
+    overflow-y: auto; /* Add scrolling specifically to the tree content */
+}
+
+.tree-list {
+    list-style: none;
+    padding: 0;
+    /* Reduced margin-top for sub-trees */
+    /* margin-top: var(--spacing-unit); */
+}
+
+.tree-list li {
+    /* Reduced vertical margin */
+    margin-bottom: calc(var(--spacing-unit) * 0.5); /* Half the spacing unit */
+    margin-left:30px;
+
+}
+
+.tree-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    /* Reduced padding */
+    padding:    2px 10px;
+    border-radius: var(--border-radius-buttons);
+    border-radius: var(--border-radius-buttons);
+    transition: background-color 0.2s ease;
+    color: var(--text-primary);
+    /* Reduced font size */
+    font-size: 0.9rem; /* Adjusted font size */
+}
+
+.tree-item:hover {
+    background-color: var(--bg-hover);
+}
+
+
+/* 
+.tree-item i {
+    margin-left: 5px;
+    margin-right: var(--spacing-unit);
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+}
+*/
+/*
+.tree-item[data-toggle="collapse"] i.tree-toggle-icon { 
+    transform: rotate(0deg);
+}
+*/
+/*
+.tree-item[data-toggle="collapse"].expanded i.tree-toggle-icon { 
+    transform: rotate(90deg);
+}
+/*
+
+.tree-item-icon {
+    font-size: 0.9rem; 
+}
+
+*/
+
+.tree-item-content {
+    font-size: 13px !important;;
+    flex-grow: 1;
+    /* Added overflow handling for long names */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+.tree-list .sub-tree { /* Specific styling for nested lists */
+    list-style: none;
+    /* Reduced left padding for nested lists */
+    padding-left: 25px; /* Keep consistent indentation, adjust --padding-medium if needed */
+    margin-top: calc(var(--spacing-unit) * 0.5); /* Reduced top margin for sub-trees */
+}
+
+
+
+
+.asset-grid {
+     display: grid;
+     gap: var(--padding-medium);
+}
+
+.color-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+
+.image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.dimension-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.asset-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-unit);
+}
+
+
+.asset-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+    padding: var(--padding-small);
+}
+
+.asset-card:hover {
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.color-preview-box {
+    width: 100%;
+    height: 80px;
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-unit);
+}
+
+.asset-info {
+    padding: 0 var(--spacing-unit);
+}
+
+.asset-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-unit);
+}
+
+.asset-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.asset-value {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    word-break: break-all; /* Prevent long values from overflowing */
+}
+
+.asset-description {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: var(--spacing-unit);
+}
+
+.image-preview-container {
+    width: 100%;
+    height: 120px;
+    background-color: var(--bg-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-bottom: var(--spacing-unit);
+}
+
+.image-preview-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.image-preview-thumb {
+     max-width: 100px;
+     max-height: 100px;
+     object-fit: contain;
+     margin-top: var(--spacing-unit);
+     border: 1px solid var(--border-color);
+     border-radius: var(--border-radius);
+}
+
+
+.dimension-bar {
+    height: 8px;
+    background-color: var(--accent-color);
+    margin-top: var(--spacing-unit);
+    border-radius: 2px;
+}
+
+.asset-type-tag {
+    font-size: 0.7rem;
+    background-color: var(--bg-hover);
+    color: var(--text-secondary);
+    padding: 2px 6px;
+    border-radius: var(--border-radius);
+    margin-left: var(--spacing-unit);
+}
+
+.font-sample { /* Added style for font sample text */
+    margin-top: var(--spacing-unit);
+    padding: var(--spacing-unit);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 0.9rem; /* Match item font size */
+    color: var(--text-primary);
+}
+
+
+/* CSS View Specific Styles */
+.css-url-section {
+    padding-bottom: var(--padding-large);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.url-display { /* Style for the container holding the URL and copy button */
+    display: flex;
+    align-items: center;
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    padding: var(--spacing-unit);
+    border-radius: var(--border-radius);
+    overflow-x: auto; /* Allow horizontal scrolling for long URLs */
+    word-break: break-all; /* Break long words */
+}
+
+.url-display code {
+    flex-grow: 1;
+    white-space: pre-wrap; /* Allow wrapping */
+    word-break: break-all; /* Break long words */
+    font-size: 0.9rem; /* Match sidebar font size */
+}
+
+.url-helper-text { /* Style for the helper text below the URL */
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: var(--spacing-unit);
+    margin-left: var(--margin)
+}
+
+
+.css-import-box {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-buttons);
+    padding: var(--padding-medium);
+    margin-bottom: var(--padding-medium);
+    margin-top: var(--padding-medium);
+    font-size: 0.9rem;
+}
+
+.css-import-box p {
+    margin-bottom: var(--spacing-unit);
+    color: var(--text-secondary);
+}
+
+.copy-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    padding: var(--spacing-unit);
+    border-radius: 50px;
+    overflow-x: auto; /* Allow horizontal scrolling for long URLs */
+        margin: var(--margin);
+}
+
+.copy-container code {
+    flex-grow: 1;
+    white-space: nowrap; /* Prevent wrapping */
+    font-size: 0.9rem;
+    padding: 0 20px 0 20px;
+}
+
+.copy-icon {
+    margin-left: var(--spacing-unit);
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+
+
+
+
+/* Modals */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1100;
+}
+
+.modal-backdrop.hidden {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    z-index: 1200;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    padding: var(--padding-large);
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: var(--padding-medium);
+    padding-bottom: var(--spacing-unit);
+}
+
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: var(--padding-medium);
+    right: var(--padding-medium);
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 10010;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    transform: translateY(100%); /* Start off-screen */
+    opacity: 0;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast.success {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.toast.error {
+    background-color: #F44336; /* Red */
+    color: white;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: var(--padding-large);
+}
+
+.empty-state p {
+    margin-bottom: var(--padding-medium);
+}
+
+
+/* Utility selector */
+.hidden {
+    display: none;
+}
+
+.mt-4 {
+    margin-top: var(--padding-medium);
+}
+
+.mb-4 {
+    margin-bottom: var(--padding-medium);
+}
+
+.rotate-90 {
+    transform: rotate(90deg);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+        /* Adjusted height calculation for mobile */
+        height: calc(100vh - var(--header-height) - 200px); /* Account for sidebar height on mobile */
+    }
+
+    .sidebar {
+        width: 100%;
+        max-height: 200px; /* Limit sidebar height on small screens */
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        /* Reset flex properties that conflict with fixed height */
+        height: 200px;
+        flex-direction: column;
+        overflow-y: hidden; /* Remove overflow from sidebar itself */
+    }
+
+     .sidebar-scrollable-content {
+          overflow-y: auto; /* Enable scrolling within the wrapper */
+          flex-grow: 1; /* Allow content to grow */
+     }
+
+
+    .main-content {
+        padding: var(--padding-medium);
+         height: auto; /* Allow height to be determined by content in column layout */
+         overflow-y: auto; /* Keep scrolling on main content */
+    }
+
+  
+
+    .app-title {
+        margin-bottom: var(--spacing-unit);
+    }
+
+     .view-header {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: var(--padding-small);
+     }
+
+     .view-actions {
+         justify-content: flex-start;
+     }
+
+     .asset-grid.color-grid {
+         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+     }
+
+     .asset-grid.image-grid {
+         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+     }
+
+     .asset-grid.dimension-grid {
+          grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+     }
+
+     .feature-grid {
+         grid-template-columns: 1fr;
+     }
+
+     .tree-item {
+          padding: var(--spacing-unit) calc(var(--spacing-unit) * 1); /* Even less padding on small screens */
+     }
+
+      .tree-list .sub-tree {
+          padding-left: var(--padding-medium); /* Maintain indentation */
+      }
+}
+
+
+
+
+
+
+.add-asset-tile {
+    display: flex;
+    width: 110px;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem; /* Large plus icon */
+    color: var(--text-secondary);
+    cursor: pointer;
+    border: 1px dashed var(--border-color); /* Dashed border */
+    background-color: var(--bg-primary);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    min-height: 100px; /* Ensure tile has a minimum clickable area */
+}
+
+.add-asset-tile:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--text-primary);
+}
+
+
+
+
+
+/* Add to styles.css */
+
+
+/* Add to styles.css */
+.important-tag {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 0.7rem;
+    padding: 1px 4px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Align items in the tree item row */
+.tree-item-row {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Puts space between the label and the value/count */
+    align-items: left; /* Vertically aligns items in the center */
+    width: 100%; /* Make the row take full width of its container */
+}
+
+/* Optional: Adjust spacing between the label content and the count */
+.tree-label {
+    /* You might not need specific styles here if using space-between */
+    margin-right: 10px; /* Add some space if needed, although space-between handles it */
+    /* Or if using flexbox on tree-label itself to align icon and text */
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* Style for the icon within the label */
+.tree-label .tree-item-icon {
+    margin-right: 5px; /* Space between icon and text */
+}
+
+
+
+
+
+
+
+
+/*  INHERITENCE UI ELEMENTS */
+
+/* Add to styles.css */
+
+/* Badge styling for master/sub brand indicators */
+.brand-type-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    margin-left: 8px;
+}
+
+.brand-type-badge.master {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.brand-type-badge.sub {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Visual distinction for master/sub brand cards */
+.brand-styling-card.master-brand {
+    border-left: 3px solid var(--accent-color);
+}
+
+.brand-styling-card.sub-brand {
+    border-left: 3px solid var(--text-secondary);
+    margin-left: 20px;
+}
+
+
+
+#inheritance-title {
+margin-top: 0;
+}
+
+.inheritance-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-unit);
+    margin:var(--margin)
+}
+
+#inheritance-info p {
+    margin-top: 2px !important;
+    margin-bottom: 0 !important;
+}
+
+.inheritance-note {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0;
+}
+
+.inheritance-info.error {
+    color: var(--danger-color);
+}
+
+/* Inherit icon styling */
+.fas.fa-level-up-alt {
+    transform: rotate(90deg);
+}
+
+
+/* Add to styles.css */
+
+/* Tree view inheritance indicators */
+.tree-item.sub-brand-item {
+    margin-left: 10px;
+}
+
+.inherit-icon {
+    color: var(--text-secondary);
+    margin-right: 4px;
+    transform: rotate(90deg);
+    font-size: 0.7rem;
+}
+
+.tree-item-container {
+    margin-left: -7px !important;
+}
+
+/* Add this to styles.css */
+.tree-item.sub-brand-item {
+    margin-left: 15px; /* Indentation for sub-brands */
+}
+
+.tree-item-content .text-secondary {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
+
+
+/* Inheritance controls layout */
+.inheritance-controls {
+    display: flex;
+    align-items: flex-start;
+    margin-top: var(--padding-medium);
+    gap: var(--padding-medium);
+}
+
+.inheritance-dropdown {
+    flex: 1; /* Takes up remaining space */
+}
+
+.view-master-btn {
+    align-self: flex-end; /* Aligns with the bottom of the dropdown section */
+    margin-top: 21px; /* Lines up with the dropdown, adjust as needed */
+    white-space: nowrap; /* Prevents button text from wrapping */
+}
+
+#view-master-brand-btn {
+    margin-bottom: 1px; /* Fine-tune vertical alignment if needed */
+    height: 36px; /* Match the height of the select element */
+}
+
+
+/* For responsive layout */
+@media (max-width: 768px) {
+    .inheritance-controls {
+        flex-direction: column;
+    }
+    
+    .view-master-btn {
+        align-self: flex-start;
+        margin-top: var(--spacing-unit);
+        width: auto; /* Allow button to size based on content on mobile */
+    }
+}
+
+
+select#edit-brand-inherit-from-select {
+    margin-left: 10px !important;
+    width: 80%;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    padding: 6px 5px;
+}
+
+
+
+
+.inheritance-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--padding-medium);
+    margin-bottom: var(--spacing-unit);
+}
+
+.inheritance-row label {
+    margin-right: var(--spacing-unit);
+    margin-bottom: 0; /* Override form-group label margin */
+    white-space: nowrap;
+}
+
+.inheritance-controls {
+    display: flex;
+    align-items: flex-start;
+    margin-top: var(--padding-medium);
+    gap: var(--padding-medium);
+    width: 60%;
+}
+
+.inheritance-controls select {
+    flex: 1;
+}
+
+#view-master-brand-btn {
+    white-space: nowrap;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+    .inheritance-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .inheritance-row label {
+        margin-bottom: var(--spacing-unit);
+    }
+    
+    .inheritance-controls {
+        width: 100%;
+    }
+}
+
+
+/* Inheritance layout */
+.inheritance-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--padding-medium);
+    margin-bottom: var(--spacing-unit);
+}
+
+.inheritance-row label {
+    margin-right: var(--spacing-unit);
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+.inheritance-controls {
+    display: flex;
+    flex: 1;
+    gap: var(--padding-medium);
+    align-items: center;
+}
+
+.inheritance-controls select {
+    flex: 1;
+}
+
+#view-master-brand-btn {
+    white-space: nowrap;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+    .inheritance-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .inheritance-row label {
+        margin-bottom: var(--spacing-unit);
+    }
+    
+    .inheritance-controls {
+        width: 100%;
+    }
+}
+
+
+.inheritance-row label,
+.url-helper-text {
+    margin-top: 12px;
+}
+
+
+
+/* asset variant */
+
+/* Add to styles.css */
+.asset-variants {
+    margin-top: var(--spacing-unit);
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--spacing-unit);
+  }
+  
+  .btn-sm {
+    padding: 2px 6px;
+    font-size: 0.8rem;
+  }
+  
+  .variants-container {
+    margin-top: var(--spacing-unit);
+  }
+  
+  .variant-badges {
+    display: flex;
+    gap: 4px;
+    margin-bottom: var(--spacing-unit);
+  }
+  
+  .breakpoint-badge {
+    font-size: 0.7rem;
+    padding: 2px 4px;
+    border-radius: 3px;
+    color: white;
+  }
+  
+  .breakpoint-badge.mobile {
+    background-color: #F44336;
+  }
+  
+  .breakpoint-badge.tablet {
+    background-color: #FF9800;
+  }
+  
+  .breakpoint-badge.desktop {
+    background-color: #4CAF50;
+  }
+
+
+
+
+
+
+  /* class styles */ 
+
+  /* In your brand-styles.css */
+.add-variable-row {
+    padding: 5px;
+    margin-top: 6px;
+    border-top: 1px dashed var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: var(--padding-sm); /* e.g., 8px */
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.add-variable-row:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.add-variable-row .icon {
+    margin-right: var(--padding-sm);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* warning icons */
+
+/* :root { (define your icon colors here if not using defaults)
+    --status-icon-warning-color: orange;
+    --status-icon-error-color: red;
+} */
+
+.variable-value-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.variable-value-wrapper .variable-value-input {
+    flex-grow: 1;
+    padding-right: 28px; /* Space for the icon */
+}
+
+/* CSS for value status dots */
+.variable-value-wrapper .value-status-icon {
+    position: absolute;
+    right: 8px; /* Adjust as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;  /* Size of the dot */
+    height: 10px; /* Size of the dot */
+    border-radius: 50%; /* Makes it round */
+    display: none; /* Hidden by default */
+    pointer-events: none;
+    background-color: transparent; /* Default */
+}
+
+/* Dot-specific styles */
+.variable-value-wrapper .value-status-icon.dot-warning {
+    background-color: var(--warning-color);
+    display: inline-block;
+}
+
+.variable-value-wrapper .value-status-icon.dot-error {
+    background-color: var(--danger-color);
+    display: inline-block;
+}
+
+/* Input field background styling based on validation (keep these if you still want input backgrounds) */
+/* .variable-value-input.value-input-var-not-exists {
+border-color: var(--warning-color);
+}
+
+.variable-value-input.value-input-error-circular {
+border-color: var(--danger-color);
+} */
+
+
+/* editor-styles.css or similar */
+
+
+
+
+.hidden {
+    display: none;
+}
+
+
+
+button#new-site-btn {
+  width: var(--sidebar-width);
+    display: flex;
+    border-top: 1px solid var(--border-color);
+    margin-top: 0  !important;
+    top: 80.3px;
+    height: calc(var(--sub-section-height) + 2.5px) !important;
+    min-height: calc(var(--sub-section-height) + 2.5px) !important;
+    max-height: calc(var(--sub-section-height) + 2.5px) !important;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--sub-header-col);
+    color: var(--text-secondary);
+    justify-content: center;
+    font-size: 15px !important;
+    align-items: center;
+  
+}
+
+
+.tertiary-btn{
+    color: #b4b4b4;
+    border: none;
+     background-color: #ffffff00;
+}
+
+.tertiary-btn:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-hover);
+}
+
+
+
+.header-sub-section {
+display: flex
+;
+    height: var(--sub-section-height) !important;
+        min-height: var(--sub-section-height) !important;
+    max-height: var(--sub-section-height) !important;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--sub-header-col);
+    color: var(--text-secondary);
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    font-size: 15px !important;
+    align-items: center;
+}
+
+.sidebar-container {
+    margin: 10px;
+}
+
+
+
+.view-description,
+.section-title,
+.card-grid,
+.feature-grid {
+    margin-left: var(--margin);
+}
+
+
+
+img.site-logo {
+    height: 55px;
+    width: 55px;
+}
+
+
+
+
+
+
+    /* Basic styling for the new elements. You can add this to your CSS file. */
+    .settings-section {
+        margin:var(--margin);
+    }
+
+
+
+    .section-description {
+        margin-bottom: 1rem;
+        color: #666;
+    }
+
+    .list-box-container {
+        margin-bottom: 1rem;
+    }
+
+    .list-box-container label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .list-box {
+    width: 100%;
+    min-height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 0.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--code-text);
+
+    width: 800px;
+    }
+
+    .button-group {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    width: 800px;
+    flex-wrap: nowrap;
+    }
+
+    .button-group .btn-primary {
+        width: 100% !important;
+    }
+
+.section-title {
+    margin-left: 0;
+    padding-left: 20px;
+}
+
+
+    /* help section */
+
+    .help-section p,
+    .help-section h3, 
+    .help-section h4{
+    margin: var(--margin);
+    margin-bottom: 50px;
+}

@@ -1,0 +1,86 @@
+/* editor-styles.css */
+/* Styles for the Ace editor implementation */
+
+/* Editor Container Styles */
+.ace-editor-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 100px) !important;    
+    border: 1px solid var(--border-color, #ccc);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+
+}
+
+.help-header {
+    margin-bottom: var(--padding-medium);
+}
+
+/* Modified status indicator */
+.url-helper-text.modified {
+    color: #f39c12; /* Warning color for unsaved changes */
+    font-style: italic;
+}
+
+/* Add some space below the editor content */
+#css-view {
+    padding-bottom: var(--padding-large);
+}
+
+/* Adjust modal styling for editor-related modals */
+.modal.editor-modal {
+    max-width: 700px; /* Allow editor modals to be wider */
+}
+
+/* Make sure the editor is responsive */
+@media (max-width: 768px) {
+    .ace-editor-container {
+        height: 50vh; /* Smaller height on mobile */
+    }
+    
+    .view-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .view-actions {
+        margin-top: var(--spacing-unit);
+        justify-content: flex-start;
+    }
+}
+
+/* Theme customization elements */
+.theme-selector {
+    margin-bottom: var(--padding-medium);
+    display: flex;
+    align-items: center;
+}
+
+.theme-selector label {
+    margin-right: var(--spacing-unit);
+    color: var(--text-secondary);
+}
+
+.theme-selector select {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-unit);
+    border-radius: var(--border-radius-buttons);
+}
+
+/* Modal-specific Ace editor adjustments */
+#class-rules-input.ace-editor-container {
+    min-height: 200px;
+    resize: vertical;
+    background: var(--editor-bg, #1e1e1e);
+}
+
+/* Ensure the Ace editor instance takes full size of container */
+#class-rules-input .ace_editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

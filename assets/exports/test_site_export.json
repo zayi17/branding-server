@@ -1,0 +1,93 @@
+{
+  "brand": {
+    "id": 1,
+    "name": "test site",
+    "site_id": 1
+  },
+  "assets": [
+    {
+      "name": "--breakpoint-mobile",
+      "type": "dimension",
+      "value": "767px",
+      "description": "Maximum width for mobile devices"
+    },
+    {
+      "name": "--breakpoint-tablet",
+      "type": "dimension",
+      "value": "1023px",
+      "description": "Maximum width for tablet devices"
+    },
+    {
+      "name": "--breakpoint-desktop",
+      "type": "dimension",
+      "value": "1024px",
+      "description": "Minimum width for desktop devices"
+    },
+    {
+      "name": "#id-1",
+      "type": "class_rule",
+      "value": "id-1-prop-1: 50px",
+      "description": null
+    },
+    {
+      "name": "--col-main",
+      "type": "color",
+      "value": "#3341ff",
+      "description": null
+    },
+    {
+      "name": "--col-tertiary",
+      "type": "color",
+      "value": "#1f3456",
+      "description": null
+    },
+    {
+      "name": "--col-colour",
+      "type": "color",
+      "value": "#545454",
+      "description": null
+    },
+    {
+      "name": "---var-2",
+      "type": "color",
+      "value": "#ffffff",
+      "description": null
+    },
+    {
+      "name": "--var-20",
+      "type": "color",
+      "value": "var(--col-primary)",
+      "description": null
+    },
+    {
+      "name": "--var-test",
+      "type": "color",
+      "value": "var(--var-test)",
+      "description": null
+    },
+    {
+      "name": "--site-logo",
+      "type": "image",
+      "value": "url(google.com.logo.png)",
+      "description": null
+    },
+    {
+      "name": ".some-class",
+      "type": "class_rule",
+      "value": "prop6: value6",
+      "description": null
+    },
+    {
+      "name": "--sec-col-red",
+      "type": "color",
+      "value": "#0e44c4",
+      "description": null
+    },
+    {
+      "name": ".test-class",
+      "type": "class_rule",
+      "value": "test-class-prop-2: 100px !important; test-class-prop-3: 200px",
+      "description": null
+    }
+  ]
+}
